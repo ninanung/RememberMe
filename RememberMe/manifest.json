@@ -1,0 +1,21 @@
+{
+    "author": "SeungJe Jun",
+    "manifest_version": 2,
+    "name": "RememberMe",
+    "description": "Store login info and show that based on url that you have been",
+    "version": "0.0.1",
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_popup": "popup.html",
+        "default_title": "RememberMe"
+    },
+    "background": {
+        "scripts": ["background.js"]
+    },
+    "permissions": [
+        "activeTab",
+        "webRequest",
+        "<all_urls>",
+        "http://localhost:3000/"
+    ]
+}
