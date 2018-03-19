@@ -1,7 +1,8 @@
 onload = function() {
     const id = document.getElementById("id");
     const password = document.getElementById("password");
-    const text = document.getElementById("text");
+    const idtext = document.getElementById("idtext");
+    const passwordtext = document.getElementById("passwordtext");
     const button = this.document.getElementById("button");
     const httpreq = new XMLHttpRequest();
     const formdata = new FormData();
@@ -9,9 +10,17 @@ onload = function() {
     const getData = function() {
         if (httpreq.readyState === 4) {
             if (httpreq.status === 200) {
-                text.innerText = httpreq.response;
+                const jsondata = JSON.parse(httpreq.response);
+                idtext.innerText = jsondata.id;
+                passwordtext.innerText = jsondata.password
+                chrome.storage.sync.set({ "id": jsondata.id }, function() {
+                    console.log("id is " + id);
+                });
+                chrome.storage.sync.set({ "password": jsondata.password }, function() {
+                    console.log("password is " + password);
+                });
             } else {
-              alert('There was a problem with the request.');
+                alert('There was a problem with the request.');
             }
         }
     }
