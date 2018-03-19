@@ -1,5 +1,3 @@
-
-
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
         if(details.method == "POST") {
@@ -10,7 +8,13 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 
 chrome.tabs.onUpdated.addListener(
-    function(tab) {
-
+    function() {
+        const urltext = document.getElementById("urltext");
+        chrome.tabs.getSelected(null,function(tab) {
+            urltext.innerText = tab.url;
+            chrome.storage.sync.set({ "id": tab.url }, function() {
+                console.log("url is " + tab.url);
+            });
+        });
     }
 );
