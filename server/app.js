@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const mongoose = require("mongoose");
+const connectHistoryApiFallback = require("connect-history-api-fallback");
 
 const login = require("./routes/login.js");
 
@@ -9,6 +10,7 @@ const app = express();
 const http = require("http").Server(app);
 mongoose.connect("mongodb://localhost:27017/test");
 
+app.use(connectHistoryApiFallback());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set("port", process.env.PORT || 3000);
