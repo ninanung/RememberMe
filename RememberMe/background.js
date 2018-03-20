@@ -12,7 +12,7 @@ chrome.tabs.onUpdated.addListener(
         const urltext = document.getElementById("urltext");
         chrome.tabs.getSelected(null,function(tab) {
             urltext.innerText = tab.url;
-            chrome.storage.sync.set({ "id": tab.url }, function() {
+            chrome.storage.sync.set({ "rememberurl": tab.url }, function() {
                 console.log("url is " + tab.url);
             });
         });

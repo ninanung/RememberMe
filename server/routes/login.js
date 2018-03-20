@@ -1,27 +1,36 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user.js");
-const multer = require("multer");
 
-const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, "./");
-    },
-    filename: function(req, file, cb) {
-        let filename = randomConfirm() + file.originalname;
-        cb(null, filename);
+router.post("/", function(req, res, next) {
+    console.log("????");
+    const id = req.body.id;
+    const password = req.body.password;
+    let info = {
+        error: "false",
+        words: "",
+        id: "",
     }
-});
-var upload = multer({ storage: storage }).single("file");
-
-router.post("/", upload, function(req, res, next) {
-    console.log(req.body.id);
-    console.log(req.body.password);
-    const data = {
-        id: req.body.id,
-        password: req.body.password
-    }
-    res.send(data);
+    User.findOne({ id: id }, function(err, user) {
+        if(err) {
+            info.error = "true";
+            info.words = "알수없는 오류발생.";
+            return res.send(info);
+        }
+        if(!user) {
+            info.error = "true";
+            info.words = "ID나 패스워드를 확인하세요.";
+            return res.send(info);
+        }
+        if(!user.checkPassword(password)) {
+            info.error = "true";
+            info.words = "ID나 패스워드를 확인하세요.";
+            return res.send(info);
+        }
+        info.id = id;
+        console.log(info);
+        return res.send(info);
+    })
 });
 
 module.exports = router;

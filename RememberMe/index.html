@@ -1,1 +1,138 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>frontend</title><link href=/static/css/app.d30aaac0f32a984b410de3aec3f7b33d.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.2ae2e69a05c33dfc65f8.js></script><script type=text/javascript src=/static/js/vendor.caeb2fbd908ed29cdf1c.js></script><script type=text/javascript src=/static/js/app.ca9fa073123d3a830392.js></script></body></html>
+<html>
+    <head>
+        <script src="popup.js"></script>
+        <script src="background.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <style type="text/css">
+            @import url("https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css");
+            #title {
+                text-align: center;
+                font-size: 50px; margin-left: 20px; margin-bottom: 20px;
+                font-weight: bold; color: #997053; text-decoration: none;
+            }
+            #app {
+                width: 400px; height: 500px; margin: 0 auto;
+            }
+            .title {
+                background: white; padding: 10px 0 0 0; color: EE6767;
+                font-size: 20px; height: 150px;
+            }
+            .btn {
+                color: #997053; font-weight: bold;
+            }
+            .btn:hover {
+                background: #997053; color: white;
+            }
+            .span {
+                float: right; margin-right: 10px;
+            }
+            .modal {
+                display: block; position: fixed; width: 100%; height: 100%;
+                left: 0; top: 0; overflow: auto; z-index: 1;
+                background: rgb(0, 0, 0); background: rgba(0, 0, 0, 0.4);
+            }
+            .form {
+                background-color: white; margin: 100px auto;
+                font: 13px "verdana"; padding: 10px 10px 10px 10px;
+                width: 300px;
+            }
+            button {
+                width: 100px; height: 40px; background: white;
+                border: white; color: #997053; font-size: 20px;
+                font-weight: bold;
+            }
+            button:hover {
+                background: #997053; color: white;
+            }
+            .form label {
+                text-align: left; margin: 5px; padding: 5px;
+                display: block;
+                display: black; font-weight: bold;
+            }
+            .form input {
+                box-sizing: border-box; outline: none; padding: 5px;
+                display: block; margin: 5px;
+            }
+            .inputhead {
+                color: #997053; font-weight: bold;
+                width: 300px; height: 40px; text-align: left;
+            }
+            #login {
+                display: none;
+            }
+            #signin {
+                display: none;
+            }
+            #logoutbutton {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <div id="login" class="modal">
+                <div class="form">
+                    <h1 class="inputhead">Login</h1>
+                    <hr>
+                    <div class="input">
+                        <label>ID</label>
+                        <input id="loginid" type="text" placeholder="ID" autofocus />
+                    </div>
+                    <div class="input">
+                        <label>Password</label>
+                        <input id="loginpassword" type="password" placeholder="Password" /> 
+                    </div>
+                    <div class="input">
+                        <button id="loginsubmit">Login</button>
+                        <button id="logincancel">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div id="signin" class="modal">
+                <div class="form">
+                    <h1 class="inputhead">Signin</h1>
+                    <hr>
+                    <div class="input">
+                        <label>ID</label>
+                        <input id="signinid" type="text" placeholder="ID" autofocus />
+                    </div>
+                    <div class="input">
+                        <label>Password</label>
+                        <input id="signinpassword" type="password" placeholder="Password" /> 
+                    </div>
+                    <div class="input">
+                        <label>Repeat Password</label>
+                        <input id="signinpasswordrepeat" type="password" placeholder="Repeat Password" /> 
+                    </div>
+                    <div class="input">
+                        <label>Email</label>
+                        <input id="signinemail" type="email" placeholder="Email" />
+                    </div>
+                    <div class="input">
+                        <label>Repeat Email</label>
+                        <input id="signinemailrepeat" type="email" placeholder="Repeat Email" />
+                    </div>
+                    <div class="input">
+                        <button id="signinsubmit">Signin</button>
+                        <button id="signincancel">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div id="body">
+                <div class="title">
+                    <h1 id="title">RememberMe</h1>
+                    <div class="span">
+                        <span id="logoutbutton"><button class="btn btn-default" onclick="logout">Logout</button></span>
+                        <div id="loginbutton">
+                            <span><button class="btn btn-default" id="loginPage">Login</button></span>
+                            <span><button class="btn btn-default" id="signinPage">Signin</button></span>
+                        <div>
+                        <br/>
+                        <span id="logoutbutton">Hello</span>
+                        <span id="loginbutton">Please Login!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
