@@ -70,68 +70,76 @@
     </head>
     <body>
         <div id="app">
+            <!-- 로그인 파트 -->
             <div id="login" class="modal">
                 <div class="form">
-                    <h1 class="inputhead">Login</h1>
+                    <h1 class="inputhead">로그인</h1>
                     <hr>
                     <div class="input">
-                        <label>ID</label>
+                        <label>아이디</label>
                         <input id="loginid" type="text" placeholder="ID" autofocus />
                     </div>
                     <div class="input">
-                        <label>Password</label>
+                        <label>비밀번호</label>
                         <input id="loginpassword" type="password" placeholder="Password" /> 
                     </div>
                     <div class="input">
-                        <button id="loginsubmit">Login</button>
-                        <button id="logincancel">Cancel</button>
+                        <button id="loginsubmit">로그인</button>
+                        <button id="logincancel">취소</button>
                     </div>
                     <h3 id="loginmessage"></h3>
                 </div>
             </div>
+            <!-- 계정생성 파트 -->
             <div id="signin" class="modal">
                 <div class="form">
-                    <h1 class="inputhead">Signin</h1>
+                    <h1 class="inputhead">계정생성</h1>
                     <hr>
                     <div class="input">
-                        <label>ID</label>
+                        <label>아이디</label>
                         <input id="signinid" type="text" placeholder="ID" autofocus />
                     </div>
                     <div class="input">
-                        <label>Password</label>
+                        <label>비밀번호</label>
                         <input id="signinpassword" type="password" placeholder="Password" /> 
                     </div>
                     <div class="input">
-                        <label>Repeat Password</label>
+                        <label>비밀번호 확인</label>
                         <input id="signinpasswordrepeat" type="password" placeholder="Repeat Password" /> 
                     </div>
                     <div class="input">
-                        <label>Email</label>
+                        <h3>이메일은 아이디나 비밀번호 분실시 사용할 메일입니다.</h3>
+                        <label>이메일</label>
                         <input id="signinemail" type="email" placeholder="Email" />
                     </div>
                     <div class="input">
-                        <label>Repeat Email</label>
+                        <label>이메일 확인</label>
                         <input id="signinemailrepeat" type="email" placeholder="Repeat Email" />
                     </div>
                     <div class="input">
-                        <button id="signinsubmit">Signin</button>
-                        <button id="signincancel">Cancel</button>
+                        <button id="signinsubmit">생성</button>
+                        <button id="signincancel">취소</button>
                     </div>
                     <h3 id="signinmessage"></h3>
                 </div>
             </div>
+            <!-- 바디 파트 -->
             <div id="body">
                 <div class="title">
                     <h1 id="title">RememberMe</h1>
                     <div class="span">
-                        <span id="logoutbutton"><button class="btn btn-default" onclick="logout">Logout</button></span>
+                        <span id="logoutbutton"><button class="btn btn-default" onclick="logout">로그아웃</button></span>
                         <div id="loginbutton">
-                            <span><button class="btn btn-default" id="loginPage">Login</button></span>
-                            <span><button class="btn btn-default" id="signinPage">Signin</button></span>
+                            <span><button class="btn btn-default" id="loginPage">로그인</button></span>
+                            <span><button class="btn btn-default" id="signinPage">계정생성</button></span>
                         <div>
                         <br/>
-                        <span id="logoutbutton">Hello</span>
-                        <span id="loginbutton">Please Login!</span>
+                        <span id="logoutbutton">안녕하세요</span>
+                        <span id="loginbutton">로그인 해주세요!</span>
+                    </div>
+                    <hr>
+                    <div>
+
                     </div>
                 </div>
             </div>

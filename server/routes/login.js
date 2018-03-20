@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require("../models/user.js");
 
 router.post("/", function(req, res, next) {
-    console.log("????");
+    console.log("id=" + req.body.id + " / password=" + req.body.password);
     const id = req.body.id;
     const password = req.body.password;
     let info = {

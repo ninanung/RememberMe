@@ -1,5 +1,7 @@
+//화면이 열리면 실행되는 함수입니다.
 onload = function() {
     //각 엘리먼트를 전부 미리 받아오는 부분
+    const httpreq = new XMLHttpRequest();
     const loginpage = document.getElementById("loginPage");
     const signinpage = document.getElementById("signinPage");
     const logincancel = document.getElementById("logincancel");
@@ -21,14 +23,16 @@ onload = function() {
         if (httpreq.readyState === 4) {
             if (httpreq.status === 200) {
                 const jsondata = JSON.parse(httpreq.response);
-                idtext.innerText = jsondata.id;
-                passwordtext.innerText = jsondata.password
+                if(jsondata.error == "true") {
+                    return loginmessage.innerText = jsondata.words;
+                }
                 chrome.storage.sync.set({ "rememberid": jsondata.id }, function() {
                     console.log("id is " + id);
                 });
                 chrome.storage.sync.set({ "rememberpassword": jsondata.password }, function() {
                     console.log("password is " + password);
                 });
+                location.reload();
             } else {
                 alert('There was a problem with the request.');
             }
@@ -44,19 +48,21 @@ onload = function() {
     logincancel.onclick = function() {
         document.getElementById("login").style.display = "none";
     }
+
     signincancel.onclick = function() {
         document.getElementById("signin").style.display = "none";
     }
+
     loginpage.onclick = function() {
         document.getElementById("login").style.display = "inline";
     }
+
     signinpage.onclick = function() {
         document.getElementById("signin").style.display = "inline";
     }
 
     //xmlhttprequest를 이용해서 서버와 통신하는 부분. 로그인과 계정생성 정보를 보내고 응답을 받는 부분
     loginsubmit.onclick = function() {
-        const httpreq = new XMLHttpRequest();
         const formdata = new FormData();
         formdata.append("id", loginid.value);
         formdata.append("password", loginpassword.value);
@@ -64,8 +70,8 @@ onload = function() {
         httpreq.open("POST", "http://localhost:3000/api/login/", true);
         httpreq.send(formdata);
     }
+
     signinsubmit.onclick = function() {
-        const httpreq = new XMLHttpRequest();
         const formdata = new FormData();
         if(signinpassword.value !== signinpasswordrepeat.value) {
             signinmessage.innerText = "비밀번호와 확인이 서로 다릅니다. 비밀번호를 확인하세요."
