@@ -34,14 +34,24 @@ onload = function() {
                 });
                 location.reload();
             } else {
-                alert('There was a problem with the request.');
+                return loginmessage.innerText = "서버와 통신중 문제가 발생했습니다. 다시 시도해 주세요."
             }
         }
     }
 
     //계정생성관련 서버의 응답을 받는 부분
     const getSigninData = function() {
-
+        if (httpreq.readyState === 4) {
+            if (httpreq.status === 200) {
+                const jsondata = JSON.parse(httpreq.response);
+                if(jsondata.error == "true") {
+                    return signinmessage.innerText = jsondata.words;
+                }
+                location.reload();
+            } else {
+                return signinmessage.innerText = "서버와 통신중 문제가 발생했습니다. 다시 시도해 주세요."
+            }
+        }        
     }
 
     //로그인과 계정생성페이지를 보여주고 감추는 기능
