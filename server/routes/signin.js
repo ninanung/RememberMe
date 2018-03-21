@@ -50,11 +50,12 @@ router.post("/", function(req, res, next) {
             let emailOption = {
                 from: "RememberMe <ninanung0503@gmail.com>",
                 to: email,
-                subject: "Hi, " + id + "! This is RememberMe. Thank you for join us!",
+                subject: "안녕하세요, " + id + "님! RememberMe를 이용해 주셔서 감사합니다!",
                 html:
-                    "<h1>Your Login protecter, RememberMe!</h1>" +
-                    "<br/><h2>Thank you for sign in.</h2>" +
-                    "<br/><h2>Now you can freely use this app in chrome.</h2>"
+                    "<h1 style='font-weight: bold; color: #997053; font-size: 40px;'>당신의 계정 지킴이, RememberMe입니다!</h1>" +
+                    "<br/><h2>이용 감사드립니다.</h2>" +
+                    "<br/><h2>회원가입이 완료되어 크롬상에서 마음껏 이용하실 수 있습니다.</h2>" +
+                    "<br/><h2>참고로 메일은 아이디나 비밀번호 분실시 정보를 전당하는 목적으로 사용됩니다.</h2>"
             }
             transporter.sendMail(emailOption, (error, inf) => {
                 if(error) {

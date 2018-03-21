@@ -73,6 +73,9 @@ onload = function() {
 
     //xmlhttprequest를 이용해서 서버와 통신하는 부분. 로그인과 계정생성 정보를 보내고 응답을 받는 부분
     loginsubmit.onclick = function() {
+        if(loginid.valus == "" || loginpassword.value == "") {
+            return loginmessage.innerText = "정보를 모두 입력해 주세요.";
+        }
         const formdata = new FormData();
         formdata.append("id", loginid.value);
         formdata.append("password", loginpassword.value);
@@ -83,6 +86,9 @@ onload = function() {
 
     signinsubmit.onclick = function() {
         const formdata = new FormData();
+        if(!signinid.value || !signinpassword.value || !signinpasswordrepeat.value || !signinemail.value || !signinemailrepeat.valeu) {
+            return signinmessage.innerText = "정보를 모두 입력해 주세요.";
+        }
         if(signinpassword.value !== signinpasswordrepeat.value) {
             signinmessage.innerText = "비밀번호와 확인이 서로 다릅니다. 비밀번호를 확인하세요."
         }
