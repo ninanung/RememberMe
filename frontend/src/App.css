@@ -1,28 +1,53 @@
+@import url("https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css");
+
 .App {
   text-align: center;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  height: 120px;
+}
+
+.buttons {
+  position: absolute; right: 10px; top: 10px; 
+}
+
+.button {
+  width: 110px; height: 50px; font-size: 25px;
+  margin: 10px 0 10px 10px; text-align: center;
+  font-weight: bold; border: 2px solid gray;
+}
+
+.button:hover {
+  background: #F4E425; color: white
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
+  background-color: #F4E425;
+  height: 340px;
   padding: 20px;
   color: white;
 }
 
-.App-title {
-  font-size: 1.5em;
+.App-title a {
+  font-size: 50px; font-weight: bold; color: #3161BB;
+  text-decoration: none;
 }
 
 .App-intro {
-  font-size: large;
+  font-size: 20px; margin-top: 20px;
+  font-weight: bold;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.empty-div {
+  height: 100px;
+}
+
+.App-footer {
+  width: 100%; height: 230px; background: #3161BB;
+}
+
+.App-footer-text {
+  color: #F4E425; font-size: 25px; margin-top: 20px;
+  font-weight: bold; padding-top: 20px;
 }
