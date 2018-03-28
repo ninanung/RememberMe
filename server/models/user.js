@@ -15,6 +15,7 @@ user.pre("save", function(next) {
     }
     else {
         user.password = bcrypt.hashSync(user.password, 10);
+        user.email = bcrypt.hashSync(user.email, 10);
         return next();
     }
 });

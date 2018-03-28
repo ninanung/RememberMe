@@ -9,7 +9,6 @@ chrome.webRequest.onBeforeRequest.addListener(
 
 //chrome.tabs.onUpdated.addListener(
 //    function() {
-//        console.log("1")
 //        chrome.tabs.getSelected(null, function(tab) {
 //            console.log("2")
 //            chrome.storage.sync.set({ "rememberurl": tab.url }, function() {
