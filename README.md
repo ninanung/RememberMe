@@ -28,6 +28,10 @@ RememberMe는 구글 익스텐션 기반으로 동작하는 사용자의 로그�
 
 아닙니다. 개발자의 졸업 프로젝트를 기반으로 하는 만큼 공부해야 할 부분이 많이 남아있으며 구상과 달라질 가능성도 큽니다. 지금은 input테그에서 데이터를 불러와서 저장하는 방식으로 개발하고자 하지만 그게 불가능 하다면 사용자가 직접 데이터를 입력하여 저장하는 방식을 취하게 될 것 같습니다. 다만 사용자가 접속하는 페이지의 URL데이터를 가져와서 DB와 비교한 후 로그인 정보를 알려주는 방식은 그대로 일 것으로 생각합니다.
 
+## 방법제시  
+
+__04/02 월요일:__ input테그에 값을 자동으로 입력하는 것이 문제가 된다. 왜냐하면 각 input테그마다 name과 id등 설정이 개발자에 따라서 다르기 때문이다. 하지만 만약 로그인 정보를 저장할 때 input테그의 정보까지 같이 저장해서 불러올 때 사용할 수 있다면 어떨까? 예를들어 name필드의 값을 계정정보와 같이 저장하여 사용한다면? 시도해볼 가치가 있어보인다.  
+
 ## 현재 모습
 ![show](https://postfiles.pstatic.net/MjAxODAzMjBfMjQz/MDAxNTIxNTI5MTk4NTIy.3QXunys4BUZ72-KqCZ3TgVI95X3Aza4E5atOCZinVdkg.KSSQjuNclgAzPMmyn-XMHCvtDLcMFd0QIaG7M2Lvz-Yg.PNG.ninanung/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2018-03-20_15.58.50.png?type=w773)  
 
