@@ -1,15 +1,41 @@
 import React, { Component } from 'react';
 import logo from './icon.png';
 import './App.css';
+import { loginPopup, signupPopup } from './store/action.js';
+import Login from './components/Login.js';
+import Signup from './components/Signup.js';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.login = this.login.bind(this);
+    this.signup = this.signup.bind(this);
+  }
+
+  login() {
+    console.log("!!!!");
+    this.props.store.dispatch(loginPopup());
+    this.forceUpdate();
+  }
+
+  signup() {
+    console.log("????");
+    this.props.store.dispatch(signupPopup());
+    this.forceUpdate();
+  }
+
   render() {
     return (
       <div className="App">
+        { this.props.store.getState().login ? <Login /> : null }
+        { this.props.store.getState().signup ? <Signup /> : null }
         <header className="App-header">
           <div className="buttons">
-            <button className="btn btn-default button">로그인</button>
-            <button className="btn btn-default button">계정생성</button>
+            <button onClick={() => this.login()} className="btn btn-default button">로그인</button>
+            <button onClick={() => this.signup()} className="btn btn-default button">계정생성</button>
+          </div>
+          <div className="buttons">
+            <button className="btn btn-default button">로그아웃</button>
           </div>
           <div className="empty-div"></div>
           <img src={logo} className="App-logo" alt="logo" />
