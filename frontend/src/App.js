@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './icon.png';
 import './App.css';
-import { loginPopup, signupPopup } from './store/action.js';
+import { loginPopup, signupPopup, loginCancel, signupCancel } from './store/action.js';
 import Login from './components/Login.js';
 import Signup from './components/Signup.js';
 
@@ -10,6 +10,8 @@ class App extends Component {
     super(props);
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
+    this.signupcancel = this.signupcancel.bind(this);
+    this.logincancel = this.logincancel.bind(this);
   }
 
   login() {
@@ -24,19 +26,33 @@ class App extends Component {
     this.forceUpdate();
   }
 
+  logincancel() {
+    console.log("!!!!");
+    this.props.store.dispatch(loginCancel());
+    this.forceUpdate();
+  }
+
+  signupcancel() {
+    console.log("????");
+    this.props.store.dispatch(signupCancel());
+    this.forceUpdate();
+  }
+
   render() {
     return (
       <div className="App">
-        { this.props.store.getState().login ? <Login /> : null }
-        { this.props.store.getState().signup ? <Signup /> : null }
+        { this.props.store.getState().login ? <Login store={this.props.store} logincancel={this.logincancel} /> : null }
+        { this.props.store.getState().signup ? <Signup store={this.props.store} signupcancel={this.signupcancel} /> : null }
         <header className="App-header">
           <div className="buttons">
             <button onClick={() => this.login()} className="btn btn-default button">로그인</button>
             <button onClick={() => this.signup()} className="btn btn-default button">계정생성</button>
           </div>
-          <div className="buttons">
-            <button className="btn btn-default button">로그아웃</button>
-          </div>
+          { window.sessionStorage.user ? 
+            <div className="buttons">
+              <button className="btn btn-default button">로그아웃</button>
+            </div> : null 
+          }
           <div className="empty-div"></div>
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title"><a href="/">RememberMe</a></h1>
