@@ -1,10 +1,36 @@
 import React, { Component } from 'react';
 import { loginCancel } from '../store/action.js';
+import contactapi from '../contactapi.js';
 import './Login.css';
 
 class Login extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            id: "",
+            password: ""
+        }
+        this.idChange = this.idChange.bind(this);
+        this.passwordChange = this.passwordChange.bind(this);
+        this.loginPost = this.loginPost.bind(this);
+    }
+
+    idChange(e) {
+        this.setState({
+            id: e.target.value,
+            password: this.state.password
+        })
+    }
+
+    passwordChange(e) {
+        this.setState({
+            id: this.state.id,
+            password: e.target.value
+        })
+    }
+
+    loginPost() {
+        contactapi.login(this.state.id, this.state.password)
     }
 
     render() {
@@ -15,14 +41,14 @@ class Login extends Component {
                     <hr/>
                     <div className="input">
                         <label>아이디</label>
-                        <input className="id" type="text" v-model="id" placeholder="ID"/>
+                        <input onChange={this.idChange} className="id" type="text" v-model="id" placeholder="ID"/>
                     </div>
                     <div className="input">
                         <label>비밀번호</label>
-                        <input className="password" type="password" v-model="password" placeholder="Password" /> 
+                        <input onChange={this.passwordChange} className="password" type="password" v-model="password" placeholder="Password" /> 
                     </div>
                     <div className="input">
-                        <button>로그인</button>
+                        <button onClick={() => this.loginPost()}>로그인</button>
                         <button onClick={() => this.props.logincancel()}>취소</button>
                     </div>
                 </div>

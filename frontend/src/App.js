@@ -41,8 +41,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        { this.props.store.getState().login ? <Login store={this.props.store} logincancel={this.logincancel} /> : null }
-        { this.props.store.getState().signup ? <Signup store={this.props.store} signupcancel={this.signupcancel} /> : null }
+        { this.props.store.getState().login ? <Login logincancel={this.logincancel} /> : null }
+        { this.props.store.getState().signup ? <Signup signupcancel={this.signupcancel} /> : null }
         <header className="App-header">
           <div className="buttons">
             <button onClick={() => this.login()} className="btn btn-default button">로그인</button>

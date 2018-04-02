@@ -39,8 +39,16 @@ RememberMe는 구글 익스텐션 기반으로 동작하는 사용자의 로그�
 >> 3. React.js
 >> 4. Chrome Extension
 
-> Modules
+> Server Modules
 >> 1. "bcrypt": "^1.0.3"
 >> 2. "body-parser": "^1.18.2"
 >> 3. "express": "^4.16.2"
 >> 4. "mongoose": "^5.0.2"
+
+> Frontend Modules
+>> 1. "axios": "^0.18.0"
+>> 2. "react": "^16.2.0"
+>> 3. "react-dom": "^16.2.0"
+>> 4. "react-redux": "^5.0.7"
+>> 5. "react-scripts": "1.1.1"
+>> 6. "redux": "^3.7.2"
