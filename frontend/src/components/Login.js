@@ -30,7 +30,22 @@ class Login extends Component {
     }
 
     loginPost() {
+        if(!this.state.id || !this.state.password) {
+            return alert("모든 작성란을 작성해 주세요.");
+        }
         contactapi.login(this.state.id, this.state.password)
+        .then((res) => {
+            if(res.data.error == "true") {
+                return alert("res.data.words");
+            }
+            else {
+                const user = {
+                    id: res.data.id,
+                    email: res.data.email
+                }
+                window.sessionStorage.user = JSON.stringify(user);
+            }
+        })
     }
 
     render() {

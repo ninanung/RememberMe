@@ -55,7 +55,7 @@ router.post("/", function(req, res, next) {
                     "<h1 style='font-weight: bold; color: #997053; font-size: 40px;'>당신의 계정 지킴이, RememberMe입니다!</h1>" +
                     "<br/><h2>이용 감사드립니다.</h2>" +
                     "<br/><h2>회원가입이 완료되어 크롬상에서 마음껏 이용하실 수 있습니다.</h2>" +
-                    "<br/><h2>참고로 메일은 아이디나 비밀번호 분실시 정보를 전당하는 목적으로 사용됩니다.</h2>"
+                    "<br/><h2>참고로 메일은 아이디나 비밀번호 분실시 정보를 전당달하는 목적으로 사용됩니다.</h2>"
             }
             transporter.sendMail(emailOption, (error, inf) => {
                 if(error) {

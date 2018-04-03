@@ -18,7 +18,7 @@ class Signup extends Component {
         this.passwordreChange = this.passwordreChange.bind(this);
         this.emailChange = this.emailChange.bind(this);
         this.emailreChange = this.emailreChange.bind(this);
-        this.signupPost = this.loginPost.bind(this);
+        this.signupPost = this.signupPost.bind(this);
     }
 
     idChange(e) {
@@ -72,7 +72,31 @@ class Signup extends Component {
     }
 
     signupPost() {
+        if(!this.state.id || !this.state.password || !this.state.passwordre || !this.state.email || !this.state.emailre) {
+            return alert("모든 작성란을 입력하세요.");
+        }
+        else if(this.state.id.length < 4 || this.state.id.length > 10) {
+            const id = document.getElementById("signup_id_input");
+            id.value = null;
+            return alert("아이디가 너무 짧거나 깁니다.");
+        }
+        else if(this.state.password !== this.state.passwordre) {
+            return alert("비밀번호와 확인이 서로 다릅니다. 비밀번호를 확인해주세요.");
+        }
+        else if(this.state.email !== this.state.emailre) {
+            return alert("이메일과 확인이 서로 다릅니다. 이메일을 확인해 주세요.");
+        }
+        
         contactapi.signup(this.state.id, this.state.password, this.state.email)
+        .then((res) => {
+            if(res.data.error == "true") {
+                return alert(res.data.words);
+            }
+            else {
+                window.location.reload(false);
+                return alert("회원가입 완료 되었습니다. 로그인 해주세요!");
+            }
+        })
     }
 
     render() {
@@ -83,7 +107,8 @@ class Signup extends Component {
                     <hr/>
                     <div className="input">
                         <label>아이디</label>
-                        <input onChange={this.idChange} type="text" placeholder="ID"/>
+                        <p className="warn">(!)아이디는 4글자 이상 10글자 미만으로 작성해 주세요.</p>
+                        <input id="signup_id_input" onChange={this.idChange} type="text" placeholder="ID"/>
                     </div>
                     <div className="input">
                         <label>비밀번호</label>
@@ -94,8 +119,8 @@ class Signup extends Component {
                         <input onChange={this.passwordreChange} type="password" placeholder="Repeat Password" /> 
                     </div>
                     <div className="input">
-                        <p className="warn">(!)메일주소는 계정정보 분실시 확인을 위해서만 사용됩니다.</p>
                         <label>이메일</label>
+                        <p className="warn">(!)메일주소는 계정정보 분실시 확인을 위해서만 사용됩니다.</p>
                         <input onChange={this.emailChange} type="email" placeholder="Email" />
                     </div>
                     <div className="input">

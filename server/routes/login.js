@@ -10,6 +10,7 @@ router.post("/", function(req, res, next) {
         error: "false",
         words: "",
         id: "",
+        email: ""
     }
     User.findOne({ id: id }, function(err, user) {
         if(err) {
@@ -28,6 +29,7 @@ router.post("/", function(req, res, next) {
             return res.send(info);
         }
         info.id = id;
+        info.email = user.email;
         console.log(info);
         return res.send(info);
     })

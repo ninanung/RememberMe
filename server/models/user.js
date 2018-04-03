@@ -5,7 +5,13 @@ const user = mongoose.Schema({
     id: { type: String, required: true, unique: true},
     password: { type: String, required: true },
     email: { type: String, required: true },
-    url: [{ type: String }]
+    urls: [{
+        url: { type: String, required: true },
+        page: { type: String, required: true },
+        spec: { type: String, required: true },
+        id: { type: String, required: true },
+        password: { type: String, required: true }
+    }]
 });
 
 user.pre("save", function(next) {
@@ -15,7 +21,6 @@ user.pre("save", function(next) {
     }
     else {
         user.password = bcrypt.hashSync(user.password, 10);
-        user.email = bcrypt.hashSync(user.email, 10);
         return next();
     }
 });
