@@ -34,10 +34,10 @@ __04/02 월요일:__ input테그에 값을 자동으로 입력하는 것이 문�
 
 ## 현재 모습
 
-__초기모습__
+###__초기모습__  
 ![show](https://postfiles.pstatic.net/MjAxODAzMjBfMjQz/MDAxNTIxNTI5MTk4NTIy.3QXunys4BUZ72-KqCZ3TgVI95X3Aza4E5atOCZinVdkg.KSSQjuNclgAzPMmyn-XMHCvtDLcMFd0QIaG7M2Lvz-Yg.PNG.ninanung/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2018-03-20_15.58.50.png?type=w773)  
 
-__04/03 화요일__
+###__04/03 화요일__  
 ![show](https://postfiles.pstatic.net/MjAxODA0MDNfMzYg/MDAxNTIyNzIyNjI4NzM1.3qxmw1fvUXhWzLvrDdDzQX1AC6dASZX-sbMLtA0N-zkg.1LyqwSIO-AXmsd5U0YV-tBMtJZpG71_f65T4zWe3Nlog.PNG.ninanung/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2018-04-03_%EC%98%A4%EC%A0%84_11.28.26.png?type=w773)  
 
 ## 사용된 것들
