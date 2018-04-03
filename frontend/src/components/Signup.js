@@ -86,7 +86,6 @@ class Signup extends Component {
         else if(this.state.email !== this.state.emailre) {
             return alert("이메일과 확인이 서로 다릅니다. 이메일을 확인해 주세요.");
         }
-        
         contactapi.signup(this.state.id, this.state.password, this.state.email)
         .then((res) => {
             if(res.data.error == "true") {

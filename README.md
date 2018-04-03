@@ -33,7 +33,12 @@ RememberMe는 구글 익스텐션 기반으로 동작하는 사용자의 로그�
 __04/02 월요일:__ input테그에 값을 자동으로 입력하는 것이 문제가 된다. 왜냐하면 각 input테그마다 name과 id등 설정이 개발자에 따라서 다르기 때문이다. 하지만 만약 로그인 정보를 저장할 때 input테그의 정보까지 같이 저장해서 불러올 때 사용할 수 있다면 어떨까? 예를들어 name필드의 값을 계정정보와 같이 저장하여 사용한다면? 시도해볼 가치가 있어보인다.  
 
 ## 현재 모습
+
+__초기모습__
 ![show](https://postfiles.pstatic.net/MjAxODAzMjBfMjQz/MDAxNTIxNTI5MTk4NTIy.3QXunys4BUZ72-KqCZ3TgVI95X3Aza4E5atOCZinVdkg.KSSQjuNclgAzPMmyn-XMHCvtDLcMFd0QIaG7M2Lvz-Yg.PNG.ninanung/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2018-03-20_15.58.50.png?type=w773)  
+
+__04/03 화요일__
+![show](https://postfiles.pstatic.net/MjAxODA0MDNfMzYg/MDAxNTIyNzIyNjI4NzM1.3qxmw1fvUXhWzLvrDdDzQX1AC6dASZX-sbMLtA0N-zkg.1LyqwSIO-AXmsd5U0YV-tBMtJZpG71_f65T4zWe3Nlog.PNG.ninanung/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2018-04-03_%EC%98%A4%EC%A0%84_11.28.26.png?type=w773)  
 
 ## 사용된 것들
 
