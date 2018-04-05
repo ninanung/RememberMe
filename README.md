@@ -44,13 +44,15 @@ function myFunction(string) {
     else {
     	res.splice(1, 100);
     }
-    var string = res[0].split(".");
-    if(string.length > 2) {
-    	string.splice(0, 1);
+    var laststring = res[0].split(".");
+    if(laststring.length > 2) {
+    	laststring.splice(0, 1);
     }
-    return string[0];
+    return laststring[0];
 }
 ~~~  
+
+__04/05 목요일:__ 1안. focus된 input테그에 값을 넣도록 하는 것은 어떤가 하는 의견을 교수님으로부터 받았다. autofocus가 아니면 자동으로 값이 들어갈지 시도해볼 필요가 있다. 2안. 대부분의 POST요청은 form으로 구성된 input을 통해 발생한다. 그렇다면 form테그를 찾아서 그 자식테그인 input에 값을 넣도록 하면 어떨까 싶다.  
 
 ## 현재 모습
 
