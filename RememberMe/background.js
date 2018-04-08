@@ -37,7 +37,7 @@ const areyou = function(innerurl) {
             console.log("url is " + innerurl);
         });
         chrome.storage.sync.get(["rememberurl"], function(result) {
-            console.log("get url is" + result.rememberurl);
+            console.log("get url is " + result.rememberurl);
         });
     }
 }
