@@ -1,5 +1,5 @@
 var form = document.querySelectorAll("form");
-var password = document.querySelector("input[type=password]");
+var password = document.querySelectorAll("input[type=password]");
 var ID = "";
 var Password = "";
 var count;
@@ -17,7 +17,14 @@ chrome.storage.sync.get(["RememberID", "RememberPassword"], function(result) {
             count = i;
         }
     }
-    password.value = Password;
+    if(password.length > 1) {
+        for(var i = 0; i < password.length; i++) {
+            password[i].value = Password;
+        }
+    }
+    else {
+        password[0].value = Password;
+    }
     document.body.appendChild(btn2);
     form[count].appendChild(btn);
 });
@@ -59,6 +66,6 @@ btn.addEventListener("click", function() {
     confirm(form[count].querySelector("input[type=text]").value);
     confirm(form[count].querySelector("input[type=password]").value);
     chrome.storage.sync.get(["rememberurl"], function(result) {
-        confirm("get url is " + result.rememberurl);
+        alert("get url is " + result.rememberurl);
     });
 })
