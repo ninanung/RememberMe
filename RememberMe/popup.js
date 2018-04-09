@@ -26,11 +26,11 @@ onload = function() {
                 if(jsondata.error == "true") {
                     return loginmessage.innerText = jsondata.words;
                 }
-                chrome.storage.sync.set({ "rememberid": jsondata.id }, function() {
-                    console.log("id is " + id);
+                chrome.storage.sync.set({ "id": jsondata.id }, function() {
+                    console.log("id is " + jsondata.id);
                 });
-                chrome.storage.sync.set({ "rememberpassword": jsondata.password }, function() {
-                    console.log("password is " + password);
+                chrome.storage.sync.set({ "password": jsondata.password }, function() {
+                    console.log("password is " + jsondata.password);
                 });
                 location.reload();
             } else {
