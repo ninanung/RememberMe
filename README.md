@@ -64,6 +64,9 @@ __04/08 일요일:__ 위에서 얘기했던 form을 서치해서 input값을 넣
 ### __04/03 화요일__  
 ![show](https://postfiles.pstatic.net/MjAxODA0MDNfMzYg/MDAxNTIyNzIyNjI4NzM1.3qxmw1fvUXhWzLvrDdDzQX1AC6dASZX-sbMLtA0N-zkg.1LyqwSIO-AXmsd5U0YV-tBMtJZpG71_f65T4zWe3Nlog.PNG.ninanung/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2018-04-03_%EC%98%A4%EC%A0%84_11.28.26.png?type=w773)  
 
+### __04/10 화요일__
+![gif](./gifs/2018-04-10 13.31.42.gif)     
+
 ## 사용된 것들
 
 > Platform
