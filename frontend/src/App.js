@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import logo from './icon.png';
 import './App.css';
 import { loginPopup, signupPopup, loginCancel, signupCancel } from './store/action.js';
+import { Route, BrowserRouter, Link, Switch, NavLink } from 'react-router-dom';
+
 import Login from './components/Login.js';
 import Signup from './components/Signup.js';
+import Home from './components/Home.js';
+import Navi from './components/Navi.js';
+import NotFount from './components/NotFound.js';
+import List from './components/List.js';
+import Insert from './components/Insert.js';
 
 class App extends Component {
   constructor(props) {
@@ -15,25 +22,21 @@ class App extends Component {
   }
 
   login() {
-    console.log("!!!!");
     this.props.store.dispatch(loginPopup());
     this.forceUpdate();
   }
 
   signup() {
-    console.log("????");
     this.props.store.dispatch(signupPopup());
     this.forceUpdate();
   }
 
   logincancel() {
-    console.log("!!!!");
     this.props.store.dispatch(loginCancel());
     this.forceUpdate();
   }
 
   signupcancel() {
-    console.log("????");
     this.props.store.dispatch(signupCancel());
     this.forceUpdate();
   }
@@ -57,22 +60,18 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title"><a href="/">RememberMe</a></h1>
         </header>
-        <div className="text-bundle">
-          <p className="App-intro">
-            우리는 당신의 계정을 기억합니다.
-          </p>
-          <p className="App-intro">
-            우리는 당신의 계정을 알려드립니다.
-          </p>
-          <p className="App-intro">
-            원한다면 언제든지 기억합니다.
-          </p>
-          <p className="App-intro">
-            하지만 오직 당신에게만 알려드립니다.
-          </p>
-          <p className="App-intro">
-            <a href="/readme">사용법을 알고싶으신가요?</a>
-          </p>
+        <Navi></Navi>
+        <div>
+          <BrowserRouter>
+            <div>
+              <Switch>
+                <Route exact path="/" component={ Home }></Route>
+                <Route path="/list" component={ List }></Route>
+                <Route path="/insert" component={ Insert }></Route>
+                <Route path="*" component={ NotFount }></Route>
+              </Switch>
+            </div>
+          </BrowserRouter>
         </div>
         <div className="App-footer">
           <p className="App-footer-text">

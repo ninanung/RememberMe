@@ -36,7 +36,7 @@ class Login extends Component {
         contactapi.login(this.state.id, this.state.password)
         .then((res) => {
             if(res.data.error == "true") {
-                return alert("res.data.words");
+                return alert(res.data.words);
             }
             else {
                 const user = {
