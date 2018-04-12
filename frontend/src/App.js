@@ -43,9 +43,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        { this.props.store.getState().login ? <Login logincancel={this.logincancel} /> : null }
-        { this.props.store.getState().signup ? <Signup signupcancel={this.signupcancel} /> : null }
+      <div id="App">
         <header className="App-header">
           <div className="buttons">
             <button onClick={() => this.login()} className="btn btn-default button">로그인</button>
@@ -60,31 +58,39 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title"><a href="/">RememberMe</a></h1>
         </header>
-        <Navi></Navi>
-        <div>
+        <div className="App-body">
           <BrowserRouter>
             <div>
-              <Switch>
-                <Route exact path="/" component={ Home }></Route>
-                <Route path="/list" component={ List }></Route>
-                <Route path="/insert" component={ Insert }></Route>
-                <Route path="*" component={ NotFount }></Route>
-              </Switch>
+              <div>
+                <Navi></Navi>
+              </div>
+              <div>
+                <Switch>
+                  <Route exact path="/" component={ Home }></Route>
+                  <Route path="/list" component={ List }></Route>
+                  <Route path="/insert" component={ Insert }></Route>
+                  <Route path="*" component={ NotFount }></Route>
+                </Switch>
+              </div>
             </div>
           </BrowserRouter>
         </div>
         <div className="App-footer">
-          <p className="App-footer-text">
-            Contact Us:
-            <br/>
-            ninanung@naver.com
-          </p>
-          <p className="App-footer-text">
-            Source Code:
-            <br/>
-            https://github.com/2018capstone/RememberMe
-          </p>
+          <div className="App-footer-text">
+            <p>
+              Contact Us:
+              <br/>
+              ninanung@naver.com
+            </p>
+            <p>
+              Source Code:
+              <br/>
+              https://github.com/2018capstone/RememberMe
+            </p>
+          </div>
         </div>
+        { this.props.store.getState().login ? <Login logincancel={this.logincancel} /> : null }
+        { this.props.store.getState().signup ? <Signup signupcancel={this.signupcancel} /> : null }
       </div>
     )
   }

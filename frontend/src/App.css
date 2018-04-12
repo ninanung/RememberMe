@@ -1,6 +1,7 @@
 @import url("https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css");
 
-.App {
+#App {
+  height: 100%;
   text-align: center;
 }
 
@@ -24,9 +25,11 @@
 
 .App-header {
   background-color: #F4E425;
+  width: 100%;
   height: 340px;
   padding: 20px;
   color: white;
+  top: 0; right: 0;
 }
 
 .App-title a {
@@ -43,9 +46,13 @@
   height: 100px;
 }
 
+.App-body {
+  width: 100%;
+}
+
 .App-footer {
-  width: 100%; height: 230px; background: #3161BB;
-  position: absolute; bottom: 0px; right: 0px;
+  width: 100%; height: 220px; background: #3161BB;
+  position: absolute;
 }
 
 .App-footer-text {

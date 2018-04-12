@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Navi extends Component {
+class Home extends Component {
     render() {
         return(
             <div className="text-bundle">
@@ -13,3 +13,5 @@ class Navi extends Component {
         )
     }
 }
+
+export default Home;

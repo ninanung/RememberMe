@@ -1,0 +1,10 @@
+.nav.navbar-nav {
+    display: flex; font-weight: bold;
+    justify-content: center;
+    flex-wrap: wrap; font-size: 17px;
+}
+@media (min-width: 768px) {
+    .navbar-nav {
+        float: none;
+    }
+}

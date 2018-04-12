@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import NotFoundImage from '../404.jpg';
+import './NotFound.css';
 
 class NotFound extends Component {
     render() {
         return(
-            <div>
-                <img style="width: 100%; height: auto;" src={ NotFoundImage } />>
+            <div id="notfoundbox">
+                <img id="notfound" src={ NotFoundImage } />
             </div>
         )
     }
