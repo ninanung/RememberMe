@@ -11,6 +11,7 @@ import Navi from './components/Navi.js';
 import NotFount from './components/NotFound.js';
 import List from './components/List.js';
 import Insert from './components/Insert.js';
+import PleaseLogin from './components/PleaseLogin.js';
 
 class App extends Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class App extends Component {
     this.signup = this.signup.bind(this);
     this.signupcancel = this.signupcancel.bind(this);
     this.logincancel = this.logincancel.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   login() {
@@ -40,19 +42,23 @@ class App extends Component {
     this.props.store.dispatch(signupCancel());
     this.forceUpdate();
   }
+  logout() {
+    window.sessionStorage.clear();
+    this.forceUpdate();
+  }
 
   render() {
     return (
       <div id="App">
         <header className="App-header">
-          <div className="buttons">
-            <button onClick={() => this.login()} className="btn btn-default button">로그인</button>
-            <button onClick={() => this.signup()} className="btn btn-default button">계정생성</button>
-          </div>
           { window.sessionStorage.user ? 
             <div className="buttons">
-              <button className="btn btn-default button">로그아웃</button>
-            </div> : null 
+              <button onClick={() => this.logout()} className="btn btn-default button">로그아웃</button>
+            </div> : 
+            <div className="buttons">
+              <button onClick={() => this.login()} className="btn btn-default button">로그인</button>
+              <button onClick={() => this.signup()} className="btn btn-default button">계정생성</button>
+            </div>
           }
           <div className="empty-div"></div>
           <img src={logo} className="App-logo" alt="logo" />
@@ -67,8 +73,17 @@ class App extends Component {
               <div>
                 <Switch>
                   <Route exact path="/" component={ Home }></Route>
-                  <Route path="/list" component={ List }></Route>
-                  <Route path="/insert" component={ Insert }></Route>
+                  { window.sessionStorage.user ? 
+                    <div>
+                      <Route path="/list" component={ List }></Route>
+                      <Route path="/insert" component={ Insert }></Route>
+                    </div> :
+                    <div>
+                      <Route path="/list" component={ PleaseLogin }></Route>
+                      <Route path="/insert" component={ PleaseLogin }></Route>
+                    </div>
+
+                  }
                   <Route path="*" component={ NotFount }></Route>
                 </Switch>
               </div>

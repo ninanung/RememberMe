@@ -45,8 +45,8 @@ class Login extends Component {
                     email: res.data.email
                 }
                 window.sessionStorage.user = JSON.stringify(user);
-                alert("로그인 되었습니다!");
-                return this.forceUpdate();
+                window.location.reload(false);
+                return alert("로그인 되었습니다!");
             }
         })
     }
