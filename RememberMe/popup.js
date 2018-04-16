@@ -20,18 +20,25 @@ window.onload = function() {
     const signinmessage = document.getElementById("signinmessage");
     const loginbutton = document.getElementById("loginbutton");
     const logoutbutton = document.getElementById("logoutbutton");
+    const insert = this.document.getElementById("insert");
+    const text = this.document.getElementById("text");
 
     const test = document.getElementById("test");
 
     chrome.storage.sync.get(["id", "email"], function(result) {
         if(result.id || result.email) {
             test.innerText = "id: " + result.id + ", email: " + result.email; 
+            hi.innerText = result.id + "님, 안녕하세요!";
             loginbutton.style.display = "none";
             logoutbutton.style.display = "inline";
+            insert.style.display = "inline";
+            text.style.display = "none"
         }
         else {
             logoutbutton.style.display = "none";
             loginbutton.style.display = "inline";
+            insert.style.display = "none";
+            text.style.display = "inline"
         }
     });
 
@@ -70,6 +77,7 @@ window.onload = function() {
                 if(jsondata.error == "true") {
                     return signinmessage.innerText = jsondata.words;
                 }
+                test.innerText = "회원가입 완료, 로그인 해주세요!";
                 location.reload();
             } else {
                 return signinmessage.innerText = "서버와 통신중 문제가 발생했습니다. 다시 시도해 주세요."
