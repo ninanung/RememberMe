@@ -69,7 +69,7 @@ __04/08 일요일:__ 위에서 얘기했던 form을 서치해서 input값을 넣
 
 ### __04/16 월요일__
 같은 아이디와 비밀번호로 로그인이 가능하다. DB를 공유하고 있기 때문.  
-<img src="https://github.com/ninanung/RememberMe/blob/master/gifs/2018-04-10.gif?raw=true" width="400px" height="700px" />  
+<img src="https://github.com/ninanung/RememberMe/blob/master/gifs/2018-04-16 17.18.51.gif?raw=true" width="400px" height="700px" />  
 
 ## 사용된 것들
 
