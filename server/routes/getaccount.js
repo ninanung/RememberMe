@@ -31,7 +31,7 @@ router.post("/", function(req, res, next) {
         }
         if(!info.id) {
             info.error = "true";
-            info.words = "해당 페이지로 저장된 계정이 없습니다."
+            info.words = "해당 페이지에는 저장된 계정이 없습니다."
         }
         console.log(info);
         return res.send(info);

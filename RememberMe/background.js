@@ -78,7 +78,7 @@ const areyou = function(innerurl, id) {
     if(innerurl !== url) {
         url = getUrlDomain(innerurl);
         chrome.storage.sync.set({ "url": url }, function() {
-
+            console.log("url set");
         });
         const data = {
             url: url,
