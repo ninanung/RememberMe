@@ -86,8 +86,9 @@ idButton.style.bottom = "70px";
 idButton.setAttribute("id", "remembermeIdButton");
 //id넣는 부분
 idButton.addEventListener("click", function() {
-    for(var i = 0; i < inputs.length; i++) {
-        inputs[i].setAttribute("onclick", "elementclickid()");
+    var input = document.querySelectorAll("input");
+    for(var i = 0; i < input.length; i++) {
+        input[i].setAttribute("onclick", "elementclickid()");
     }
 })
 
@@ -97,8 +98,9 @@ passwordButton.style.bottom = "40px";
 passwordButton.setAttribute("id", "remembermePasswordButton");
 //password넣는 부분
 passwordButton.addEventListener("click", function() {
-    for(var i = 0; i < inputs.length; i++) {
-        inputs[i].setAttribute("onclick", "elementclickpassword()");
+    var input = document.querySelectorAll("input");
+    for(var i = 0; i < input.length; i++) {
+        input[i].setAttribute("onclick", "elementclickpassword()");
     }
 })
 

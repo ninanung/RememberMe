@@ -7,10 +7,8 @@ const user = mongoose.Schema({
     email: { type: String, required: true },
     urls: [{
         url: { type: String, required: true },
-        page: { type: String, required: true },
-        spec: { type: String, required: true },
-        id: { type: String, required: true },
-        password: { type: String, required: true }
+        urlid: { type: String, required: true },
+        urlpassword: { type: String, required: true }
     }]
 });
 

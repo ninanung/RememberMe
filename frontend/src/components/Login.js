@@ -54,7 +54,7 @@ class Login extends Component {
     render() {
         return(
             <div className="modal">
-                <div className="form">
+                <form className="form">
                     <h1 className="inputhead">로그인</h1>
                     <hr/>
                     <div className="input">
@@ -69,7 +69,7 @@ class Login extends Component {
                         <button onClick={() => this.loginPost()}>로그인</button>
                         <button onClick={() => this.props.logincancel()}>취소</button>
                     </div>
-                </div>
+                </form>
             </div>
         )
     }

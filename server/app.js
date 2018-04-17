@@ -6,6 +6,8 @@ const connectHistoryApiFallback = require("connect-history-api-fallback");
 
 const login = require("./routes/login.js");
 const signup = require("./routes/signup.js");
+const insert = require("./routes/insert.js");
+const getaccount = require('./routes/getaccount.js');
 
 const app = express();
 const http = require("http").Server(app);
@@ -19,6 +21,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/login', login);
 app.use('/api/signup', signup);
+app.use('/api/insert', insert);
+app.use('/api/getaccount', getaccount);
 
 http.listen(app.get("port"), function() {
     console.log("server start in " + app.get("port"));
