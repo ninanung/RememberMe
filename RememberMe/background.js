@@ -25,14 +25,16 @@
 //);
 
 const httpreq = new XMLHttpRequest();
-const insertmessage = document.getElementById("insertmessage");
 
 const getUrlData = function() {
     if (httpreq.readyState === 4) {
         if (httpreq.status === 200) {
             const jsondata = JSON.parse(httpreq.response);
             if(jsondata.error == "true") {
-                return insertmessage.innerText = jsondata.words;
+                chrome.storage.sync.set({ "words": jsondata.words }, function() {
+                    console.log(jsondata.words);
+                });
+                return ;
             }
             chrome.storage.sync.set({ "RememberID": jsondata.id }, function() {
                 console.log("get id");
@@ -42,7 +44,9 @@ const getUrlData = function() {
             });
             location.reload();
         } else {
-            return insertmessage.innerText = "서버와 통신중 문제가 발생했습니다. 다시 시도해 주세요."
+            chrome.storage.sync.set({ "words": "서버 통신에러 발생." }, function() {
+                console.log("서버 통신에러 발생");
+            });
         }
     }
 }

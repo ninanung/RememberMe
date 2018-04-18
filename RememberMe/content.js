@@ -14,8 +14,8 @@ var Password = "";
 var count;
 
 chrome.storage.sync.get(["RememberID", "RememberPassword"], function(result) {
-    ID = "SomeID"//result.RememberID;
-    Password = "SomePassword"//result.RememberPassword;
+    ID = result.RememberID;
+    Password = result.RememberPassword;
     for(var i = 0; i < form.length; i++) {
         if(form[i].querySelector("input[type=password]") !== null) {
             if(form[i].querySelector("input[type=text]") !== null) {

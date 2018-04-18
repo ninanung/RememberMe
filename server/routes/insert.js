@@ -3,10 +3,11 @@ const router = express.Router();
 const User = require("../models/user.js");
 
 router.post("/", function(req, res, next) {
-    console.log("url=" + req.body.url + " / id=" + req.body.id + " / password=" + req.body.password);
+    console.log("url=" + req.body.url + " / insertid=" + req.body.insertid + " / insertpassword=" + req.body.insertpassword);
     const url = req.body.url;
     const id = req.body.id;
-    const password = req.body.password;
+    const insertid = req.body.insertid;
+    const insertpassword = req.body.insertpassword;
     let info = {
         error: "false",
         words: "",
@@ -26,15 +27,15 @@ router.post("/", function(req, res, next) {
         for(let i = 0; i < user.urls.length; i ++) {
             if(user.urls[i].url == url) {
                 isThere = true;
-                user.urls[i].urlid = id;
-                user.urls[i].urlpassword = password;
+                user.urls[i].urlid = insertid;
+                user.urls[i].urlpassword = insertpassword;
             }
         }
         if(!isThere) {
             user.urls.push({
                 url: url,
-                urlid: id,
-                urlpassword: password
+                urlid: insertid,
+                urlpassword: insertpassword
             })
         }
         user.save(function(err){

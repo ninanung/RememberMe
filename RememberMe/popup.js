@@ -20,10 +20,18 @@ window.onload = function() {
     const signinmessage = document.getElementById("signinmessage");
     const loginbutton = document.getElementById("loginbutton");
     const logoutbutton = document.getElementById("logoutbutton");
-    const insert = this.document.getElementById("insert");
-    const text = this.document.getElementById("text");
+    const insert = document.getElementById("insert");
+    const text = document.getElementById("text");
+    const insertmessage = document.getElementById("insertmessage");
+    const insertsubmit = document.getElementById("insertsubmit");
+    const insertpassword = document.getElementById("insertpassword");
+    const insertid  = document.getElementById("insertid");
 
     const test = document.getElementById("test");
+
+    chrome.storage.sync.get(["words"], function(result) {
+        insertmessage.innerText = result.words;
+    });
 
     chrome.storage.sync.get(["id", "email"], function(result) {
         if(result.id || result.email) {
@@ -46,6 +54,23 @@ window.onload = function() {
     logoutbutton.onclick = function() {
         chrome.storage.sync.remove(["id", "email"], function() {});
         return location.reload();
+    }
+
+    //계정삽입관련 서버의 응답을 받는 부분
+    const getInsertData = function() {
+        if (httpreq.readyState === 4) {
+            if (httpreq.status === 200) {
+                const jsondata = JSON.parse(httpreq.response);
+                if(jsondata.error == "true") {
+                    chrome.storage.sync.set({ "words": jsondata.words }, function() {
+                        console.log(jsondata.words);
+                    });
+                }
+                location.reload();
+            } else {
+                return loginmessage.innerText = "서버와 통신중 문제가 발생했습니다. 다시 시도해 주세요."
+            }
+        }
     }
 
     //로그인관련 서버의 응답을 받는 부분
@@ -100,6 +125,28 @@ window.onload = function() {
 
     signinpage.onclick = function() {
         document.getElementById("signin").style.display = "inline";
+    }
+
+    //계정삽입부분
+    insertsubmit.onclick = function() {
+        chrome.storage.sync.get(["id", "url"], function(result) {
+            if(insertid.valus == "" || insertpassword.value == "") {
+                return insertmessage.innerText = "계정정보를 모두 입력해 주세요."
+            }
+            const data = {
+                url: result.url,
+                id: result.id,
+                insertid: loginid.value,
+                insertpassword: loginpassword.value
+            }
+            httpreq.onreadystatechange = getLoginData;
+            httpreq.open("POST", "http://localhost:3000/api/insert/", true);
+            httpreq.onload = function(data) {
+                console.log('loaded', this.responseText);
+            };
+            httpreq.setRequestHeader('Content-Type', 'application/json');
+            httpreq.send(JSON.stringify(data));
+        });
     }
 
     //xmlhttprequest를 이용해서 서버와 통신하는 부분. 로그인과 계정생성 정보를 보내고 응답을 받는 부분
