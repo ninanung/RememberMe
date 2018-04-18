@@ -16,37 +16,38 @@ var count;
 chrome.storage.sync.get(["RememberID", "RememberPassword"], function(result) {
     ID = result.RememberID;
     Password = result.RememberPassword;
-    for(var i = 0; i < form.length; i++) {
-        if(form[i].querySelector("input[type=password]") !== null) {
-            if(form[i].querySelector("input[type=text]") !== null) {
-                form[i].querySelector("input[type=text]").value = ID;
+    if(result.RememberID) {
+        for(var i = 0; i < form.length; i++) {
+            if(form[i].querySelector("input[type=password]") !== null) {
+                if(form[i].querySelector("input[type=text]") !== null) {
+                    form[i].querySelector("input[type=text]").value = ID;
+                }
+                if(form[i].querySelector("input[type=email]") !== null) {
+                    form[i].querySelector("input[type=email]").value = ID;
+                }
+                count = i;
             }
-            if(form[i].querySelector("input[type=email]") !== null) {
-                form[i].querySelector("input[type=email]").value = ID;
+        }
+        if(password.length > 1) {
+            for(var i = 0; i < password.length; i++) {
+                password[i].value = Password;
             }
-            count = i;
         }
-    }
-    if(password.length > 1) {
-        for(var i = 0; i < password.length; i++) {
-            password[i].value = Password;
+        else if(password.length == 1) {
+            password[0].value = Password;
         }
+        var actualIdCode = "\n" + "function elementclickid() {" + "\n" +
+        "document.activeElement.value = '"+ ID + "'" + "\n" +
+        "}" + "\n"
+        inputIdScript.textContent = actualIdCode;      
+        (document.body||document.documentElement).appendChild(inputIdScript);
+    
+        var actualPasswordCode = "\n" + "function elementclickpassword() {" + "\n" +
+        "document.activeElement.value = '"+ Password + "'" + "\n" +
+        "}" + "\n"
+        inputPasswordScript.textContent = actualPasswordCode;      
+        (document.body||document.documentElement).appendChild(inputPasswordScript);
     }
-    else if(password.length == 1) {
-        password[0].value = Password;
-    }
-
-    var actualIdCode = "\n" + "function elementclickid() {" + "\n" +
-    "document.activeElement.value = '"+ ID + "'" + "\n" +
-    "}" + "\n"
-    inputIdScript.textContent = actualIdCode;      
-    (document.body||document.documentElement).appendChild(inputIdScript);
-
-    var actualPasswordCode = "\n" + "function elementclickpassword() {" + "\n" +
-    "document.activeElement.value = '"+ Password + "'" + "\n" +
-    "}" + "\n"
-    inputPasswordScript.textContent = actualPasswordCode;      
-    (document.body||document.documentElement).appendChild(inputPasswordScript);
 
     form[count].appendChild(saveButton);
 });
@@ -70,6 +71,7 @@ function styleToButton(bwidth, bheight, bposition, bleft, bright, bfontSize, bba
 saveButton.appendChild(document.createTextNode("RememberMe에 저장하고 로그인!"));
 styleToButton("100px", "100px", "absolute", false, "10px", "10px", "#F4E425", "#3161BB", "100000000", saveButton);
 saveButton.style.top = "10px";
+saveButton.style.display = "none";
 saveButton.setAttribute("id", "remembermeMenuButton");
 //api로 저장하는 부분을 작성
 saveButton.addEventListener("click", function() {
@@ -83,6 +85,7 @@ saveButton.addEventListener("click", function() {
 idButton.appendChild(document.createTextNode("ID넣기"));
 styleToButton("100px", "30px", "fixed", "10px", false, "10px", "#F4E425", "#3161BB", "10000", idButton);
 idButton.style.bottom = "70px";
+idButton.style.display = "none";
 idButton.setAttribute("id", "remembermeIdButton");
 //id넣는 부분
 idButton.addEventListener("click", function() {
@@ -95,6 +98,7 @@ idButton.addEventListener("click", function() {
 passwordButton.appendChild(document.createTextNode("Password넣기"));
 styleToButton("100px", "30px", "fixed", "10px", false, "10px", "#F4E425", "#3161BB", "10000", passwordButton);
 passwordButton.style.bottom = "40px";
+passwordButton.style.display = "none";
 passwordButton.setAttribute("id", "remembermePasswordButton");
 //password넣는 부분
 passwordButton.addEventListener("click", function() {

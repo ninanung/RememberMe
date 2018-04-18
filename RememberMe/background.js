@@ -42,6 +42,9 @@ const getUrlData = function() {
             chrome.storage.sync.set({ "RememberPassword": jsondata.password }, function() {
                 console.log("get password");
             });
+            chrome.storage.sync.set({ "words": "해당 페이지에 계정이 존재합니다." }, function() {
+                console.log("해당 페이지에 계정이 존재합니다.");
+            });
             location.reload();
         } else {
             chrome.storage.sync.set({ "words": "서버 통신에러 발생." }, function() {
@@ -72,6 +75,7 @@ let url = "";
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     chrome.storage.sync.get(["id"], function(result) {
+        chrome.storage.sync.remove(["RememberID", "RememberPassword"], function() {});
         if(result.id) {
             areyou(tab.url, result.id);
         }

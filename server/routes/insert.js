@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require("../models/user.js");
 
 router.post("/", function(req, res, next) {
-    console.log("url=" + req.body.url + " / insertid=" + req.body.insertid + " / insertpassword=" + req.body.insertpassword);
+    console.log("url=" + req.body.url + " / id=" + req.body.id + " / insertid=" + req.body.insertid + " / insertpassword=" + req.body.insertpassword);
     const url = req.body.url;
     const id = req.body.id;
     const insertid = req.body.insertid;

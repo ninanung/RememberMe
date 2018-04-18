@@ -88,10 +88,24 @@
             #hi {
                 width: 400px;
             }
+            #insertmodal {
+                display: none;
+            }
         </style>
     </head>
     <body>
         <div id="app">
+            <!-- 계정등록 파트 -->
+            <div id="insertmodal" class="modal">
+                <div class="form">
+                    <p id="inserttext"></p>
+                    <div class="input">
+                        <button id="insertmodalsubmit">가즈아</button>
+                        <button id="insertmodalcancel">취소</button>
+                    </div>
+                    <h4 id="loginmessage"></h4>
+                </div>
+            </div>
             <!-- 로그인 파트 -->
             <div id="login" class="modal">
                 <div class="form">
@@ -171,6 +185,7 @@
                     <div>
                         <img style="width: 100px; height: 100px; margin: 5px 30% 0 35%;" src="./icon.png" />
                     </div>
+                    <p id="hometext"></p>
                 </div>
                 <div id="insert">
                     <h3 style="padding-left: 20px;" id="hi">sample</h3>
