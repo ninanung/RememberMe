@@ -1,3 +1,5 @@
+let httpreq = new XMLHttpRequest();
+
 var form = document.querySelectorAll("form");
 var password = document.querySelectorAll("input[type=password]");
 var inputs = document.querySelectorAll("input");
@@ -13,9 +15,31 @@ var ID = "";
 var Password = "";
 var count;
 
+const getInsertData = function() {
+    if (httpreq.readyState === 4) {
+        if (httpreq.status === 200) {
+            const jsondata = JSON.parse(httpreq.response);
+            if(jsondata.error == "true") {
+                chrome.storage.sync.set({ "words": jsondata.words }, function() {
+                    console.log(jsondata.words);
+                });
+            }
+            location.reload();
+            alert("계정등록이 완료되었습니다.")
+        } else {
+            return alert("서버와 통신중 문제가 발생했습니다. 다시 시도해 주세요.")
+        }
+    }
+}
+
 chrome.storage.sync.get(["RememberID", "RememberPassword"], function(result) {
     ID = result.RememberID;
     Password = result.RememberPassword;
+    for(var i = 0; i < form.length; i++) {
+        if(form[i].querySelector("input[type=password]") !== null) {
+            count = i;
+        }
+    }
     if(result.RememberID) {
         for(var i = 0; i < form.length; i++) {
             if(form[i].querySelector("input[type=password]") !== null) {
@@ -48,7 +72,6 @@ chrome.storage.sync.get(["RememberID", "RememberPassword"], function(result) {
         inputPasswordScript.textContent = actualPasswordCode;      
         (document.body||document.documentElement).appendChild(inputPasswordScript);
     }
-
     form[count].appendChild(saveButton);
 });
 
@@ -72,20 +95,36 @@ saveButton.appendChild(document.createTextNode("RememberMe에 저장하고 로�
 styleToButton("100px", "100px", "absolute", false, "10px", "10px", "#F4E425", "#3161BB", "100000000", saveButton);
 saveButton.style.top = "10px";
 saveButton.style.display = "none";
+saveButton.style.textIndent = "0"
 saveButton.setAttribute("id", "remembermeMenuButton");
 //api로 저장하는 부분을 작성
 saveButton.addEventListener("click", function() {
-    confirm(form[count].querySelector("input[type=text]").value);
-    confirm(form[count].querySelector("input[type=password]").value);
-    chrome.storage.sync.get(["rememberurl"], function(result) {
-        alert("get url is " + result.rememberurl);
-    });
+    const id = form[count].querySelector("input[type=text]").value;
+    const password = form[count].querySelector("input[type=password]").value;
+    if(confirm("id: " + id + ", password: " + password + "\n정보가 맞으신가요?")) {
+        chrome.storage.sync.get(["id", "url"], function(result) {
+            const data = {
+                url: result.url,
+                id: result.id,
+                insertid: id,
+                insertpassword: password
+            }
+            httpreq.onreadystatechange = getInsertData;
+            httpreq.open("POST", "http://localhost:3000/api/insert/", true);
+            httpreq.onload = function(data) {
+                console.log('loaded', this.responseText);
+            };
+            httpreq.setRequestHeader('Content-Type', 'application/json');
+            httpreq.send(JSON.stringify(data));
+        });
+    }
 })
 
 idButton.appendChild(document.createTextNode("ID넣기"));
 styleToButton("100px", "30px", "fixed", "10px", false, "10px", "#F4E425", "#3161BB", "10000", idButton);
 idButton.style.bottom = "70px";
 idButton.style.display = "none";
+idButton.style.textIndent = "0"
 idButton.setAttribute("id", "remembermeIdButton");
 //id넣는 부분
 idButton.addEventListener("click", function() {
@@ -99,6 +138,7 @@ passwordButton.appendChild(document.createTextNode("Password넣기"));
 styleToButton("100px", "30px", "fixed", "10px", false, "10px", "#F4E425", "#3161BB", "10000", passwordButton);
 passwordButton.style.bottom = "40px";
 passwordButton.style.display = "none";
+passwordButton.style.textIndent = "0"
 passwordButton.setAttribute("id", "remembermePasswordButton");
 //password넣는 부분
 passwordButton.addEventListener("click", function() {
@@ -111,6 +151,7 @@ passwordButton.addEventListener("click", function() {
 menuButton.appendChild(document.createTextNode("RememberMe메뉴"));
 styleToButton("100px", "30px", "fixed", "10px", false, "10px", "#F4E425", "#3161BB", "10000", menuButton);
 menuButton.style.bottom = "10px";
+menuButton.style.textIndent = "0"
 //메뉴를 열고닫는 부분
 menuButton.addEventListener("click", function() {
     var remembermebutton = document.getElementById("remembermeMenuButton");

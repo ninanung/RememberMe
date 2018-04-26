@@ -36,20 +36,18 @@ class Login extends Component {
         }
         contactapi.login(this.state.id, this.state.password)
         .then((res) => {
-            if(res.data.error == "true") {
+            if(res.data.error === "true") {
                 return alert(res.data.words);
             }
             else {
-                const user = {
-                    id: res.data.id,
-                    email: res.data.email
-                }
-                window.sessionStorage.user = JSON.stringify(user);
-                window.location.reload(false);
-                return alert("로그인 되었습니다!");
+                window.sessionStorage.Reemail = res.data.email;
+                window.sessionStorage.Reid = res.data.id;
+                return alert("로그인 되었습니다.");
             }
         })
     }
+
+    
 
     render() {
         return(

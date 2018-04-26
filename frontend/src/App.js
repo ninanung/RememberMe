@@ -51,7 +51,7 @@ class App extends Component {
     return (
       <div id="App">
         <header className="App-header">
-          { window.sessionStorage.user ? 
+          { window.sessionStorage.getItem("Reid") ? 
             <div className="buttons">
               <button onClick={() => this.logout()} className="btn btn-default button">로그아웃</button>
             </div> : 
@@ -73,7 +73,7 @@ class App extends Component {
               <div>
                 <Switch>
                   <Route exact path="/" component={ Home }></Route>
-                  { window.sessionStorage.user ? 
+                  { window.sessionStorage.getItem("Reid") ? 
                     <div>
                       <Route path="/list" component={ List }></Route>
                       <Route path="/insert" component={ Insert }></Route>

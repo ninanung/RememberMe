@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { signupCancel } from '../store/action.js';
 import contactapi from '../contactapi.js';
 import './Signup.css';
 
@@ -88,7 +87,7 @@ class Signup extends Component {
         }
         contactapi.signup(this.state.id, this.state.password, this.state.email)
         .then((res) => {
-            if(res.data.error == "true") {
+            if(res.data.error === "true") {
                 return alert(res.data.words);
             }
             else {

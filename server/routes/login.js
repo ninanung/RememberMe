@@ -5,7 +5,6 @@ const User = require("../models/user.js");
 router.post("/", function(req, res, next) {
     console.log("id=" + req.body.id + " / password=" + req.body.password);
     const id = req.body.id;
-    const password = req.body.password;
     let info = {
         error: "false",
         words: "",
@@ -23,7 +22,7 @@ router.post("/", function(req, res, next) {
             info.words = "ID나 패스워드를 확인하세요.";
             return res.send(info);
         }
-        if(!user.checkPassword(password)) {
+        if(!user.checkPassword(req.body.password)) {
             info.error = "true";
             info.words = "ID나 패스워드를 확인하세요.";
             return res.send(info);

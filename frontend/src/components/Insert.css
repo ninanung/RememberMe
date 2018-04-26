@@ -1,0 +1,32 @@
+    .form {
+        background-color: white; margin: 100px auto;
+        max-width: 500px; min-width: 200px;
+        font: 20px "verdana"; padding: 10px 10px 10px 10px;
+    }
+    button {
+        width: 100px; height: 40px; background: white;
+        border: white; color: #3161BB; font-size: 20px;
+        font-weight: bold;
+    }
+    button:hover {
+        background: #F4E425; color: white;
+    }
+    .form label {
+        text-align: left; margin: 5px; padding: 5px;
+        display: block;
+        display: black; font-weight: bold;
+    }
+    .form input {
+        box-sizing: border-box; outline: none; padding: 5px;
+        display: block; margin: 5px;
+    }
+    .insert-head-text {
+        color: #3161BB; font-weight: bold;
+        width: 400px; height: 40px; text-align: center;
+    }
+    .url-input {
+        width: 400px;
+    }
+    .url-text {
+        font-size: 15px; color: black;
+    }
