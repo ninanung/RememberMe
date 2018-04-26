@@ -34,20 +34,20 @@ class Login extends Component {
         if(!this.state.id || !this.state.password) {
             return alert("모든 작성란을 작성해 주세요.");
         }
-        contactapi.login(this.state.id, this.state.password)
-        .then((res) => {
-            if(res.data.error === "true") {
-                return alert(res.data.words);
+        contactapi.login(this.state.id, this.state.password).then(
+            (res) => {
+                if(res.data.error === "true") {
+                    return alert(res.data.words);
+                }
+                else {
+                    sessionStorage.setItem("Reid", res.data.id);
+                    sessionStorage.setItem("Reemail", res.data.email);
+                    window.location.reload(false);
+                    return alert("로그인 되었습니다.");
+                }
             }
-            else {
-                window.sessionStorage.Reemail = res.data.email;
-                window.sessionStorage.Reid = res.data.id;
-                return alert("로그인 되었습니다.");
-            }
-        })
+        )
     }
-
-    
 
     render() {
         return(
@@ -57,15 +57,15 @@ class Login extends Component {
                     <hr/>
                     <div className="input">
                         <label>아이디</label>
-                        <input onChange={this.idChange} className="id" type="text" v-model="id" placeholder="ID"/>
+                        <input onChange={this.idChange} className="id" type="text" placeholder="ID"/>
                     </div>
                     <div className="input">
                         <label>비밀번호</label>
-                        <input onChange={this.passwordChange} className="password" type="password" v-model="password" placeholder="Password" /> 
+                        <input onChange={this.passwordChange} className="password" type="password" placeholder="Password" /> 
                     </div>
                     <div className="input">
-                        <button onClick={() => this.loginPost()}>로그인</button>
-                        <button onClick={() => this.props.logincancel()}>취소</button>
+                        <button type="button" onClick={() => this.loginPost()}>로그인</button>
+                        <button type="button" onClick={() => this.props.logincancel()}>취소</button>
                     </div>
                 </form>
             </div>

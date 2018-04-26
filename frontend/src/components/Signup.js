@@ -126,8 +126,8 @@ class Signup extends Component {
                         <input onChange={this.emailreChange} type="email" placeholder="Repeat Email" />
                     </div>
                     <div className="input">
-                        <button onClick={() => this.signupPost()}>계정생성</button>
-                        <button onClick={() => this.props.signupcancel()}>취소</button>
+                        <button type="button" onClick={() => this.signupPost()}>계정생성</button>
+                        <button type="button" onClick={() => this.props.signupcancel()}>취소</button>
                     </div>
                 </div>
             </div>
