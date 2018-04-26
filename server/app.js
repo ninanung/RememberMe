@@ -8,6 +8,7 @@ const login = require("./routes/login.js");
 const signup = require("./routes/signup.js");
 const insert = require("./routes/insert.js");
 const getaccount = require('./routes/getaccount.js');
+const getaccountlist = require('./routes/getaccountlist.js');
 
 const app = express();
 const http = require("http").Server(app);
@@ -23,6 +24,7 @@ app.use('/api/login', login);
 app.use('/api/signup', signup);
 app.use('/api/insert', insert);
 app.use('/api/getaccount', getaccount);
+app.use('/api/getaccountlist', getaccountlist);
 
 http.listen(app.get("port"), function() {
     console.log("server start in " + app.get("port"));

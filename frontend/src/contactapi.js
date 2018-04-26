@@ -9,5 +9,8 @@ export default {
     },
     insert: function(url, id, insertid, insertpassword) {
         return axios.post("http://localhost:3000/api/insert", { id: id, url: url, insertid: insertid, insertpassword: insertpassword });
+    },
+    getaccountlist: function(id) {
+        return axios.get("http://localhost:3000/api/getaccountlist", { id: id });
     }
 }

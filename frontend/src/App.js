@@ -84,7 +84,7 @@ class App extends Component {
                     </div>
 
                   }
-                  <Route path="*" component={ NotFount }></Route>
+                  <Route component={ NotFount }></Route>
                 </Switch>
               </div>
             </div>
