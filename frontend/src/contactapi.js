@@ -11,6 +11,9 @@ export default {
         return axios.post("http://localhost:3000/api/insert", { id: id, url: url, insertid: insertid, insertpassword: insertpassword });
     },
     getaccountlist: function(id) {
-        return axios.get("http://localhost:3000/api/getaccountlist", { id: id });
+        return axios.post("http://localhost:3000/api/getaccountlist", { id: id });
+    },
+    deleteaccount: function(number, id) {
+        return axios.post("http://localhost:3000/api/deleteaccount", { number: number, id: id });
     }
 }

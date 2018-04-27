@@ -50,8 +50,7 @@ class Insert extends Component {
         }
         const id = window.sessionStorage.getItem("Reid");
         const url = getUrlDomain(this.state.url);
-        console.log(id + ", " + url);
-        const isConfirm = true//confirm("해당 URL에 이미 계정이 있었던 경우 덮어쓰기 됩니다.\nid: " + this.state.id + ", password: " + this.state.password + "\n계정정보가 맞나요?");
+        const isConfirm = global.confirm("해당 URL에 이미 계정이 있었던 경우 덮어쓰기 됩니다.\nid: " + this.state.id + ", password: " + this.state.password + "\n계정정보가 맞나요?");
         if(isConfirm) {
             contactapi.insert(url, id, this.state.id, this.state.password)
             .then((res) => {

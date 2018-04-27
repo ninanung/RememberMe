@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require("../models/user.js");
 
 router.post("/", function(req, res, next) {
-    console.log("url=" + req.body.url + " / id=" + req.body.id + " / insertid=" + req.body.insertid + " / insertpassword=" + req.body.insertpassword);
+    console.log("account added");
     const url = req.body.url;
     const id = req.body.id;
     const insertid = req.body.insertid;
@@ -44,7 +44,6 @@ router.post("/", function(req, res, next) {
                 info.words = "데이터베이스 오류가 발생했습니다. 다시 시도해 주세요";
             }
         })
-        console.log(info);
         return res.send(info);
     })
 });

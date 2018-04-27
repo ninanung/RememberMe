@@ -15,7 +15,7 @@ let transporter = nodemailer.createTransport(smtpTransport({
 }));
 
 router.post("/", function(req, res, next) {
-    console.log("id=" + req.body.id + " / password=" + req.body.password + " / email=" + req.body.email);
+    console.log("someone signup");
     const id = req.body.id;
     const password = req.body.password;
     const email = req.body.email;
@@ -64,7 +64,6 @@ router.post("/", function(req, res, next) {
                     return res.send(info);
                 }
             });
-            console.log(info);
             return res.send(info);
         });
     });

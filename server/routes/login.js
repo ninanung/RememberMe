@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require("../models/user.js");
 
 router.post("/", function(req, res, next) {
-    console.log("id=" + req.body.id + " / password=" + req.body.password);
+    console.log("someone login");
     const id = req.body.id;
     let info = {
         error: "false",
@@ -29,7 +29,6 @@ router.post("/", function(req, res, next) {
         }
         info.id = id;
         info.email = user.email;
-        console.log(info);
         return res.send(info);
     })
 });

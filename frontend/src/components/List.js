@@ -12,12 +12,12 @@ class List extends Component {
     }
 
     componentWillMount() {
-        const id = window.sessionStorage.getItem("Reid");
+        const id = sessionStorage.getItem("Reid");
         contactapi.getaccountlist(id)
         .then((res) => {
             if(res.data.error === "true") {
                 this.props.history.push("/");
-                return alert("")
+                return alert(res.data.words);
             }
             else {
                 this.setState({
@@ -25,19 +25,32 @@ class List extends Component {
                 })
             }
         })
-
     }
 
     render() {
         return(
             <div className="listbody">
-                {this.state.list.map((content, i) => {
-                    <ListAccount 
-                        url={content.url} 
-                        id={content.urlid}
-                        password={content.password}
-                    ></ListAccount>
-                })}
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>사이트</th>
+                            <th>아이디</th>
+                            <th>비밀번호</th>
+                            <th>삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.list.map(function(content, i) {
+                        return <ListAccount 
+                            count={i + 1} 
+                            url={content.url} 
+                            id={content.urlid} 
+                            password={content.urlpassword}
+                        ></ListAccount>
+                        })}
+                    </tbody>
+                </table>
             </div>
         )
     }

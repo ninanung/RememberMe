@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const User = require('../models/user.js');
 
-router.get("/", function(req, res, next) {
+router.post("/", function(req, res, next) {
     const id = req.body.id;
-    console.log(id);
+    console.log("getting account list");
     let data = {
         error: "false",
         words: "",
@@ -22,7 +22,6 @@ router.get("/", function(req, res, next) {
             return res.send(data);
         }
         data.list = user.urls;
-        console.log(data);
         res.send(data);
     });
 })
