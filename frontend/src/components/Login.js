@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { loginCancel } from '../store/action.js';
 import contactapi from '../contactapi.js';
+import cryption from '../cryption.js';
 import './Login.css';
 
 class Login extends Component {
