@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import contactapi from '../contactapi.js';
+import crypt from '../cryption.js';
 import './Signup.css';
 
 class Signup extends Component {
