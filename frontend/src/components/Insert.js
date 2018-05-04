@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import contactapi from '../contactapi.js';
+import crypt from '../cryption.js';
 import './Insert.css';
 
 function getUrlDomain(string) {
@@ -52,7 +53,7 @@ class Insert extends Component {
         const url = getUrlDomain(this.state.url);
         const isConfirm = global.confirm("해당 URL에 이미 계정이 있었던 경우 덮어쓰기 됩니다.\nid: " + this.state.id + ", password: " + this.state.password + "\n계정정보가 맞나요?");
         if(isConfirm) {
-            contactapi.insert(url, id, this.state.id, this.state.password)
+            contactapi.insert(crypt.encryption(url), crypt.encryption(id), crypt.encryption(this.state.id), crypt.encryption(this.state.password))
             .then((res) => {
                 if(res.data.error === "true") {
                     return alert(res.data.words);

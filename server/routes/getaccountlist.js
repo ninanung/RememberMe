@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const User = require('../models/user.js');
+const crypt = require("./cryption.js");
 
 router.post("/", function(req, res, next) {
-    const id = req.body.id;
+    const id = crypt.decryption(req.body.id);
     console.log("getting account list");
     let data = {
         error: "false",

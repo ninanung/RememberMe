@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user.js");
+const crypt = require("./cryption.js");
 
 router.post("/", function(req, res, next) {
     console.log("account added");
@@ -13,7 +14,7 @@ router.post("/", function(req, res, next) {
         words: "",
     }
     let isThere = false;
-    User.findOne({ id: id }, function(err, user) {
+    User.findOne({ id: crypt.decryption(id) }, function(err, user) {
         if(err) {
             info.error = "true";
             info.words = "알수없는 오류발생.";

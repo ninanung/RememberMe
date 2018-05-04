@@ -1,17 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user.js");
-const cryption = require("./cryption.js");
+const crypt = require("./cryption.js");
 
 router.post("/", function(req, res, next) {
     console.log("someone login");
-    const id = req.body.id;
-    let string = "abcdefghijklmnopqrstuvwxyz"
-    console.log(string);
-    string = cryption.encryption(string);
-    console.log(string);
-    string = cryption.decryption(string);
-    console.log(string);
+    const id = crypt.decryption(req.body.id);
     let info = {
         error: "false",
         words: "",
@@ -34,7 +28,7 @@ router.post("/", function(req, res, next) {
             info.words = "ID나 패스워드를 확인하세요.";
             return res.send(info);
         }
-        info.id = id;
+        info.id = crypt.encryption(id);
         info.email = user.email;
         return res.send(info);
     })

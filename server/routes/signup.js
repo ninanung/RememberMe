@@ -4,6 +4,7 @@ const smtpTransport = require("nodemailer-smtp-transport");
 
 const router = express.Router();
 const User = require("../models/user.js");
+const crypt = require("./cryption.js");
 
 //이메일 발송 모듈 설정
 let transporter = nodemailer.createTransport(smtpTransport({
@@ -16,9 +17,9 @@ let transporter = nodemailer.createTransport(smtpTransport({
 
 router.post("/", function(req, res, next) {
     console.log("someone signup");
-    const id = req.body.id;
+    const id = crypt.decryption(req.body.id);
     const password = req.body.password;
-    const email = req.body.email;
+    const email = crypt.decryption(req.body.email);
     let info = {
         error: "false",
         words: ""
@@ -35,9 +36,9 @@ router.post("/", function(req, res, next) {
             return res.send(info);
         }
         let newUser = new User({
-            id: id,
+            id: crypt.encryption(id),
             password: password,
-            email: email,
+            email: crypt.encryption(email),
         });
         newUser.save(function(err) {    
             if(err) {

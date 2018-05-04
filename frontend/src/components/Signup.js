@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import contactapi from '../contactapi.js';
 import crypt from '../cryption.js';
+import check from '../check.js';
 import './Signup.css';
 
 class Signup extends Component {
@@ -80,13 +81,22 @@ class Signup extends Component {
             id.value = null;
             return alert("아이디가 너무 짧거나 깁니다.");
         }
+        else if(check.checkKorean(this.state.id) || check.checkKorean(this.state.password) || check.checkKorean(this.state.email)) {
+            return alert("아이디와 비밀번호, 이메일에는 한글을 사용하실 수 없습니다.");
+        }
+        else if(check.checkWhiteSpace(this.state.id) || check.checkWhiteSpace(this.state.password) || check.checkWhiteSpace(this.state.email)) {
+            return alert("아이디와 비밀번호, 이메일에는 띄어쓰기를 사용하실 수 없습니다.");
+        }
+        else if(check.checkUpperDigit(this.state.password)) {
+            return alert("비밀번호에는 영어 대문자를 사용하실 수 없습니다.");
+        }
         else if(this.state.password !== this.state.passwordre) {
             return alert("비밀번호와 확인이 서로 다릅니다. 비밀번호를 확인해주세요.");
         }
         else if(this.state.email !== this.state.emailre) {
             return alert("이메일과 확인이 서로 다릅니다. 이메일을 확인해 주세요.");
         }
-        contactapi.signup(this.state.id, this.state.password, this.state.email)
+        contactapi.signup(crypt.encryption(this.state.id), crypt.encryption(this.state.password), crypt.encryption(this.state.email))
         .then((res) => {
             if(res.data.error === "true") {
                 return alert(res.data.words);

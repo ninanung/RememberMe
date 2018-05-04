@@ -1,4 +1,4 @@
-modules.exports = {
+module.exports = {
     checkWhiteSpace: function(string) {
         const white = /\s/;
         if(white.test(string)) {

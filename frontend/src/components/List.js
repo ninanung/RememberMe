@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import ListAccount from './ListAccount.js';
 import contactapi from '../contactapi.js';
+import crypt from '../cryption.js';
 
 class List extends Component {
     constructor(props) {
@@ -13,7 +14,7 @@ class List extends Component {
 
     componentWillMount() {
         const id = sessionStorage.getItem("Reid");
-        contactapi.getaccountlist(id)
+        contactapi.getaccountlist(crypt.encryption(id))
         .then((res) => {
             if(res.data.error === "true") {
                 this.props.history.push("/");

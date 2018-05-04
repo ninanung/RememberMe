@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { loginCancel } from '../store/action.js';
 import contactapi from '../contactapi.js';
-import cryption from '../cryption.js';
+import crypt from '../cryption.js';
 import './Login.css';
 
 class Login extends Component {
@@ -35,14 +35,14 @@ class Login extends Component {
         if(!this.state.id || !this.state.password) {
             return alert("모든 작성란을 작성해 주세요.");
         }
-        contactapi.login(this.state.id, this.state.password).then(
+        contactapi.login(crypt.encryption(this.state.id), crypt.encryption(this.state.password)).then(
             (res) => {
                 if(res.data.error === "true") {
                     return alert(res.data.words);
                 }
                 else {
-                    sessionStorage.setItem("Reid", res.data.id);
-                    sessionStorage.setItem("Reemail", res.data.email);
+                    sessionStorage.setItem("Reid", crypt.decryption(res.data.id));
+                    sessionStorage.setItem("Reemail", crypt.decryption(res.data.email));
                     window.location.reload(false);
                     return alert("로그인 되었습니다.");
                 }
