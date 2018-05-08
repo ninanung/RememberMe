@@ -1,5 +1,8 @@
 let httpreq = new XMLHttpRequest();
 
+const check = require("./check.js");
+const crypt = require("./cryption.js");
+
 var form = document.querySelectorAll("form");
 var password = document.querySelectorAll("input[type=password]");
 var inputs = document.querySelectorAll("input");
@@ -104,10 +107,10 @@ saveButton.addEventListener("click", function() {
     if(confirm("id: " + id + ", password: " + password + "\n정보가 맞으신가요?")) {
         chrome.storage.sync.get(["id", "url"], function(result) {
             const data = {
-                url: result.url,
-                id: result.id,
-                insertid: id,
-                insertpassword: password
+                url: crypt.encryption(result.url),
+                id: crypt.encryption(result.id),
+                insertid: crypt.encryption(id),
+                insertpassword: crypt.encryption(password)
             }
             httpreq.onreadystatechange = getInsertData;
             httpreq.open("POST", "http://localhost:3000/api/insert/", true);

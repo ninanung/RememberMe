@@ -24,6 +24,9 @@
 //    }
 //);
 
+const check = require("./check.js");
+const crypt = require("./cryption.js");
+
 const httpreq = new XMLHttpRequest();
 
 const getUrlData = function() {
@@ -36,10 +39,10 @@ const getUrlData = function() {
                 });
                 return ;
             }
-            chrome.storage.sync.set({ "RememberID": jsondata.id }, function() {
+            chrome.storage.sync.set({ "RememberID": crypt.decryption(jsondata.id) }, function() {
                 console.log("get id");
             });
-            chrome.storage.sync.set({ "RememberPassword": jsondata.password }, function() {
+            chrome.storage.sync.set({ "RememberPassword": crypt.decryption(jsondata.password) }, function() {
                 console.log("get password");
             });
             chrome.storage.sync.set({ "words": "해당 페이지에 계정이 존재합니다." }, function() {
@@ -89,8 +92,8 @@ const areyou = function(innerurl, id) {
             console.log("url set");
         });
         const data = {
-            url: url,
-            id: id
+            url: crypt.encryption(url),
+            id: crypt.encryption(id)
         }
         httpreq.onreadystatechange = getUrlData;
         httpreq.open("POST", "http://localhost:3000/api/getaccount/", true);

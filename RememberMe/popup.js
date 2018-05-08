@@ -3,6 +3,9 @@ window.onload = function() {
     //각 엘리먼트를 전부 미리 받아오는 부분
     let httpreq = new XMLHttpRequest();
 
+    const check = require("./check.js");
+    const crypt = require("./cryption.js");
+
     const loginpage = document.getElementById("loginPage");
     const signinpage = document.getElementById("signinPage");
     const logincancel = document.getElementById("logincancel");
@@ -94,10 +97,10 @@ window.onload = function() {
                 if(jsondata.error == "true") {
                     return loginmessage.innerText = jsondata.words;
                 }
-                chrome.storage.sync.set({ "id": jsondata.id }, function() {
+                chrome.storage.sync.set({ "id": crypt.decryption(jsondata.id) }, function() {
                     console.log("id is " + jsondata.id);
                 });
-                chrome.storage.sync.set({ "email": jsondata.email }, function() {
+                chrome.storage.sync.set({ "email": crypt.decryption(jsondata.email) }, function() {
                     console.log("email is " + jsondata.email);
                 });
                 location.reload();
@@ -157,10 +160,10 @@ window.onload = function() {
     insertmodalsubmit.onclick = function() {
         chrome.storage.sync.get(["id", "url"], function(result) {
             const data = {
-                url: result.url,
-                id: result.id,
-                insertid: insertid.value,
-                insertpassword: insertpassword.value
+                url: crypt.encryption(result.url),
+                id: crypt.encryption(result.id),
+                insertid: crypt.encryption(insertid.value),
+                insertpassword: crypt.encryption(insertpassword.value)
             }
             httpreq.onreadystatechange = getInsertData;
             httpreq.open("POST", "http://localhost:3000/api/insert/", true);
@@ -178,8 +181,8 @@ window.onload = function() {
             return loginmessage.innerText = "정보를 모두 입력해 주세요.";
         }
         const data = {
-            id: loginid.value,
-            password: loginpassword.value
+            id: crypt.encryption(loginid.value),
+            password: crypt.encryption(loginpassword.value)
         }
         httpreq.onreadystatechange = getLoginData;
         httpreq.open("POST", "http://localhost:3000/api/login/", true);
@@ -194,6 +197,19 @@ window.onload = function() {
         if(!signinid.value || !signinpassword.value || !signinpasswordrepeat.value || !signinemail.value || !signinemailrepeat.value) {
             return signinmessage.innerText = "정보를 모두 입력해 주세요.";
         }
+        else if(signinid.value.length < 4 || signinid.value.length > 10) {
+            signinid.value = null;
+            return signinmessage.innerText = "아이디가 너무 짧거나 깁니다.";
+        }
+        else if(check.checkKorean(signinid.value) || check.checkKorean(signinpassword.value) || check.checkKorean(signinemail.value)) {
+            return signinmessage.innerText = "아이디와 비밀번호, 이메일에는 한글을 사용하실 수 없습니다.";
+        }
+        else if(check.checkWhiteSpace(signinid.value) || check.checkWhiteSpace(signinpassword.value) || check.checkWhiteSpace(signinemail.value)) {
+            return signinmessage.innerText = "아이디와 비밀번호, 이메일에는 띄어쓰기를 사용하실 수 없습니다.";
+        }
+        else if(check.checkUpperDigit(signinpassword.value)) {
+            return signinmessage.innerText = "비밀번호에는 영어 대문자를 사용하실 수 없습니다.";
+        }
         if(signinpassword.value !== signinpasswordrepeat.value) {
             return signinmessage.innerText = "비밀번호와 확인이 서로 다릅니다. 비밀번호를 확인하세요."
         }
@@ -201,9 +217,9 @@ window.onload = function() {
             return signinmessage.innerText = "이메일과 확인이 서로 다릅니다. "
         }
         const data = {
-            id: signinid.value,
-            password: signinpassword.value,
-            email: signinemail.value
+            id: crypt.encryption(signinid.value),
+            password: crypt.encryption(signinpassword.value),
+            email: crypt.encryption(signinemail.value)
         }
         httpreq.onreadystatechange = getSigninData;
         httpreq.open("POST", "http://localhost:3000/api/signup/", true);
