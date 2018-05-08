@@ -34,7 +34,7 @@ export default {
                 count++;
             }
         }
-        res = res.toString().replace(/,/gi, "").split(".");
+        res = res.toString().replace(/,/gi, "").split("/");
         for(let j = 0; j < res.length; j++) {
             for(let k = 0; k < alpha.length; k++) {
                 if(res[j] === crypt[k]) {

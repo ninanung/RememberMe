@@ -55,7 +55,6 @@ router.post("/", function(req, res, next) {
                 if(error) {
                     info.error = "true";
                     info.words = "이메일 발송오류, 주소를 확인하세요.";
-                    return res.send(info);
                 }
             });
             if(err) {

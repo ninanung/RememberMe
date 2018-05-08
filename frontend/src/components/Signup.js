@@ -105,7 +105,7 @@ class Signup extends Component {
                 return alert(res.data.words);
             }
             else {
-                //window.location.reload(false);
+                window.location.reload(false);
                 return alert("회원가입 완료 되었습니다. 로그인 해주세요!");
             }
         });

@@ -6,7 +6,7 @@ const crypt = require("./cryption.js");
 router.post("/", function(req, res, next) {
     console.log("getting one account");
     const url = req.body.url;
-    const id = crypt.decryption(req.body.id);
+    const id = req.body.id;
     let info = {
         error: "false",
         words: "",
