@@ -8,6 +8,15 @@ export default {
             return false;
         }
     },
+    checkBlockSomeSpecioal: function(string) {
+        const special = /[,\/]/;
+        if(special.test(string)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    },
     checkKorean: function(string) {
         const korean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
         if(korean.test(string)) {

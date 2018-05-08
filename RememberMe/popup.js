@@ -1,12 +1,14 @@
 const alpha = [
     "a","b","c","d","e","f","g","h","i","j",'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y',"z",
+    'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
     '1','2','3','4','5','6','7','8','9','0',
     '`','~','!','@','#','$','%','^','&','*','(',')','-','_','=','+','[',']','{','}',"\\",'|',";",":","\'",'\"',',','<','.','>','/','?',
 ];
 const crypt = [
     '1qm','34e','91s','bnx','j8s','puq','i09','bnz','xm2','4b2','952','xnt','al1','cba','iop','1bv','56m','7r3','s09','234','sa1','2v8','s98','rtx','lkj','h23',
+    '!QM','#$E','(!S','BNX','J*S','PUQ','I)(','BNZ','XM@','$B@','(%@','XNT','AL!','CBA','IOP','!BV','%^M','&R#','S)(','@#$','SA!','@V*','S(*','RTX','LKJ','H@#',
     'w2n','br5','09w','1w6','htm','10s','20e','zv7','7m1','ny9',
-    "f8w", "4dk", "efv", "40d", "1ks", "5gm", "zc8", "00e", "2g2", "kg2", "tx6", "jsj", "wv3", "48u", "2t8", "678", "bhc", "pta", "gt2", "eta", "5v6", "yt7", "1dg", "3u7", "48e", "k0j", "seo", "fn7", "mg4", "2sd", "3r4", "rp7",
+    "f8w","4dk","efv","40d","1ks","5gm","zc8","00e","2g2","kg2","tx6","jsj","wv3","48u","2t8","678","bhc","pta","gt2","eta","5v6","yt7","1dg","3u7","48e","k0j","seo","fn7","mg4","2sd","3r4","rp7",
 ];
 
 const cryption = {
@@ -50,6 +52,15 @@ const check = {
     checkWhiteSpace: function(string) {
         const white = /\s/;
         if(white.test(string)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    },
+    checkBlockSomeSpecioal: function(string) {
+        const special = /[,\/]/;
+        if(special.test(string)) {
             return true;
         }
         else {
@@ -288,11 +299,14 @@ window.onload = function() {
         else if(check.checkKorean(signinid.value) || check.checkKorean(signinpassword.value) || check.checkKorean(signinemail.value)) {
             return signinmessage.innerText = "아이디와 비밀번호, 이메일에는 한글을 사용하실 수 없습니다.";
         }
+        else if(check.checkBlockSomeSpecioal(signinid.value) || check.checkBlockSomeSpecioal(signinpassword.value) || check.checkBlockSomeSpecioal(signinemail.value)) {
+            return signinmessage.innerText = "특수문자 ','와 '/'는 계정생성에 사용하실 수 없습니다.";
+        }
+        else if(check.checkSpecial(signinid.value)) {
+            return signinmessage.innerText = "아이디에는 특수문자를 사용하실 수 없습니다.";
+        }
         else if(check.checkWhiteSpace(signinid.value) || check.checkWhiteSpace(signinpassword.value) || check.checkWhiteSpace(signinemail.value)) {
             return signinmessage.innerText = "아이디와 비밀번호, 이메일에는 띄어쓰기를 사용하실 수 없습니다.";
-        }
-        else if(check.checkUpperDigit(signinpassword.value)) {
-            return signinmessage.innerText = "비밀번호에는 영어 대문자를 사용하실 수 없습니다.";
         }
         if(signinpassword.value !== signinpasswordrepeat.value) {
             return signinmessage.innerText = "비밀번호와 확인이 서로 다릅니다. 비밀번호를 확인하세요."
