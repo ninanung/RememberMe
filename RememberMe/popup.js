@@ -1,10 +1,94 @@
+const alpha = [
+    "a","b","c","d","e","f","g","h","i","j",'k','l','m','n','o','p','q','r','s','t','u','v','w','x','y',"z",
+    '1','2','3','4','5','6','7','8','9','0',
+    '`','~','!','@','#','$','%','^','&','*','(',')','-','_','=','+','[',']','{','}',"\\",'|',";",":","\'",'\"',',','<','.','>','/','?',
+];
+const crypt = [
+    '1qm','34e','91s','bnx','j8s','puq','i09','bnz','xm2','4b2','952','xnt','al1','cba','iop','1bv','56m','7r3','s09','234','sa1','2v8','s98','rtx','lkj','h23',
+    'w2n','br5','09w','1w6','htm','10s','20e','zv7','7m1','ny9',
+    "f8w", "4dk", "efv", "40d", "1ks", "5gm", "zc8", "00e", "2g2", "kg2", "tx6", "jsj", "wv3", "48u", "2t8", "678", "bhc", "pta", "gt2", "eta", "5v6", "yt7", "1dg", "3u7", "48e", "k0j", "seo", "fn7", "mg4", "2sd", "3r4", "rp7",
+];
+
+const cryption = {
+    encryption: function(string) {
+        let res = string.replace(/ /gi, "").split("").toString().replace(/,/gi, "").split("");
+        for(let i = 0; i < res.length; i++) {
+            for(let k = 0; k < alpha.length; k++) {
+                  if(res[i] === alpha[k]) {
+                    res.splice(i, 1, crypt[k]);
+                    k = alpha.length + 1;
+                }
+            }
+        }
+        const str = res.toString().replace(/,/gi, "");
+        return str;
+    },
+    decryption: function(string) {
+        let count = 0;
+        let res = string.split("");
+        for(let i = 0; i < res.length; i++) {
+            if(i !== 0 && i%3 === 0) {
+                  res.splice(i+count, 0, ".");
+                count++;
+            }
+        }
+        res = res.toString().replace(/,/gi, "").split(".");
+        for(let j = 0; j < res.length; j++) {
+            for(let k = 0; k < alpha.length; k++) {
+                  if(res[j] === crypt[k]) {
+                    res.splice(j, 1, alpha[k]);
+                    k = alpha.length + 1;
+                }
+            }
+        }
+        const str = res.toString().replace(/,/gi, "");
+        return str;
+    }
+}
+
+const check = {
+    checkWhiteSpace: function(string) {
+        const white = /\s/;
+        if(white.test(string)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    },
+    checkKorean: function(string) {
+        const korean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+        if(korean.test(string)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    },
+    checkUpperDigit: function(string) {
+        const upper = /[A-Z]/;
+        if(upper.test(string)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    },
+    checkSpecial: function(string) {
+        const special = /[!@#$%^&*()\-_=+\\\/\[\]{};:\'",.<>\/?|`~]/;
+        if(special.test(string)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+}
+
 //화면이 열리면 실행되는 함수입니다.
 window.onload = function() {
     //각 엘리먼트를 전부 미리 받아오는 부분
     let httpreq = new XMLHttpRequest();
-
-    const check = require("./check.js");
-    const crypt = require("./cryption.js");
 
     const loginpage = document.getElementById("loginPage");
     const signinpage = document.getElementById("signinPage");
@@ -97,10 +181,10 @@ window.onload = function() {
                 if(jsondata.error == "true") {
                     return loginmessage.innerText = jsondata.words;
                 }
-                chrome.storage.sync.set({ "id": crypt.decryption(jsondata.id) }, function() {
+                chrome.storage.sync.set({ "id": cryption.decryption(jsondata.id) }, function() {
                     console.log("id is " + jsondata.id);
                 });
-                chrome.storage.sync.set({ "email": crypt.decryption(jsondata.email) }, function() {
+                chrome.storage.sync.set({ "email": cryption.decryption(jsondata.email) }, function() {
                     console.log("email is " + jsondata.email);
                 });
                 location.reload();
@@ -160,10 +244,10 @@ window.onload = function() {
     insertmodalsubmit.onclick = function() {
         chrome.storage.sync.get(["id", "url"], function(result) {
             const data = {
-                url: crypt.encryption(result.url),
-                id: crypt.encryption(result.id),
-                insertid: crypt.encryption(insertid.value),
-                insertpassword: crypt.encryption(insertpassword.value)
+                url: cryption.encryption(result.url),
+                id: cryption.encryption(result.id),
+                insertid: cryption.encryption(insertid.value),
+                insertpassword: cryption.encryption(insertpassword.value)
             }
             httpreq.onreadystatechange = getInsertData;
             httpreq.open("POST", "http://localhost:3000/api/insert/", true);
@@ -181,8 +265,8 @@ window.onload = function() {
             return loginmessage.innerText = "정보를 모두 입력해 주세요.";
         }
         const data = {
-            id: crypt.encryption(loginid.value),
-            password: crypt.encryption(loginpassword.value)
+            id: cryption.encryption(loginid.value),
+            password: cryption.encryption(loginpassword.value)
         }
         httpreq.onreadystatechange = getLoginData;
         httpreq.open("POST", "http://localhost:3000/api/login/", true);
@@ -217,9 +301,9 @@ window.onload = function() {
             return signinmessage.innerText = "이메일과 확인이 서로 다릅니다. "
         }
         const data = {
-            id: crypt.encryption(signinid.value),
-            password: crypt.encryption(signinpassword.value),
-            email: crypt.encryption(signinemail.value)
+            id: cryption.encryption(signinid.value),
+            password: cryption.encryption(signinpassword.value),
+            email: cryption.encryption(signinemail.value)
         }
         httpreq.onreadystatechange = getSigninData;
         httpreq.open("POST", "http://localhost:3000/api/signup/", true);
