@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import logo from './icon.png';
 import './App.css';
 import { loginPopup, signupPopup, loginCancel, signupCancel } from './store/action.js';
-import { Route, BrowserRouter, Link, Switch, NavLink } from 'react-router-dom';
+import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
 
 import Login from './components/Login.js';
 import Signup from './components/Signup.js';
 import Home from './components/Home.js';
 import Navi from './components/Navi.js';
-import NotFount from './components/NotFound.js';
+import NotFound from './components/NotFound.js';
 import List from './components/List.js';
 import Insert from './components/Insert.js';
 import PleaseLogin from './components/PleaseLogin.js';
@@ -82,9 +82,8 @@ class App extends Component {
                       <Route path="/list" component={ PleaseLogin }></Route>
                       <Route path="/insert" component={ PleaseLogin }></Route>
                     </div>
-
                   }
-                  <Route component={ NotFount }></Route>
+                  <Route path="*" exact component={ NotFound }></Route>
                 </Switch>
               </div>
             </div>

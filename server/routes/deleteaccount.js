@@ -9,7 +9,7 @@ router.post("/", function(req, res, next) {
         error: "false",
         words: ""
     }
-    User.findOne({ id: crypt.decryption(req.body.id) }, function(err, user) {
+    User.findOne({ id: req.body.id }, function(err, user) {
         if(err) {
             data.error = "true";
             data.words = "서버에서 문제가 발생했습니다. 다시 시도해 주세요.";

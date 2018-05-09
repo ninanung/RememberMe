@@ -16,7 +16,7 @@ const cryption = {
         let res = string.replace(/ /gi, "").split("").toString().replace(/,/gi, "").split("");
         for(let i = 0; i < res.length; i++) {
             for(let k = 0; k < alpha.length; k++) {
-                  if(res[i] === alpha[k]) {
+                if(res[i] === alpha[k]) {
                     res.splice(i, 1, crypt[k]);
                     k = alpha.length + 1;
                 }
@@ -30,14 +30,14 @@ const cryption = {
         let res = string.split("");
         for(let i = 0; i < res.length; i++) {
             if(i !== 0 && i%3 === 0) {
-                  res.splice(i+count, 0, ".");
+                res.splice(i+count, 0, "/");
                 count++;
             }
         }
-        res = res.toString().replace(/,/gi, "").split(".");
+        res = res.toString().replace(/,/gi, "").split("/");
         for(let j = 0; j < res.length; j++) {
             for(let k = 0; k < alpha.length; k++) {
-                  if(res[j] === crypt[k]) {
+                if(res[j] === crypt[k]) {
                     res.splice(j, 1, alpha[k]);
                     k = alpha.length + 1;
                 }

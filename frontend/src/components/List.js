@@ -42,7 +42,8 @@ class List extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.list.map(function(content, i) {
+                        { this.state.list.length > 0 ? null : <h1>아직 등록된 계정이 없습니다.</h1> }
+                        { this.state.list.map(function(content, i) {
                         return <ListAccount 
                             count={i + 1} 
                             url={content.url} 
