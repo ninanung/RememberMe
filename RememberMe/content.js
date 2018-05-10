@@ -153,6 +153,9 @@ saveButton.addEventListener("click", function() {
     const password = form[count].querySelector("input[type=password]").value;
     if(confirm("id: " + id + ", password: " + password + "\n정보가 맞으신가요?")) {
         chrome.storage.sync.get(["id", "url"], function(result) {
+            if(!result.id || !result.url) {
+                return alert("이 버튼을 사용하시려면 로그인 해주세요.");
+            }
             const data = {
                 url: cryption.encryption(result.url),
                 id: cryption.encryption(result.id),

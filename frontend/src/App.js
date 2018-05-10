@@ -12,6 +12,7 @@ import NotFound from './components/NotFound.js';
 import List from './components/List.js';
 import Insert from './components/Insert.js';
 import PleaseLogin from './components/PleaseLogin.js';
+import Readme from './components/Readme.js';
 
 class App extends Component {
   constructor(props) {
@@ -61,7 +62,7 @@ class App extends Component {
             </div>
           }
           <div className="empty-div"></div>
-          <img src={logo} className="App-logo" alt="logo" />
+          <a href="/"><img src={logo} className="App-logo" alt="logo" /></a>
           <h1 className="App-title"><a href="/">RememberMe</a></h1>
         </header>
         <div className="App-body">
@@ -73,6 +74,7 @@ class App extends Component {
               <div>
                 <Switch>
                   <Route exact path="/" component={ Home }></Route>
+                  <Route exact path="/readme" component={ Readme }></Route>
                   { window.sessionStorage.getItem("Reid") ? 
                     <div>
                       <Route path="/list" component={ List }></Route>
