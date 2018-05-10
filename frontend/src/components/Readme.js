@@ -14,3 +14,5 @@ class Readme extends Component {
         )
     }
 }
+
+export default Readme;

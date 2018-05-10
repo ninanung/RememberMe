@@ -1,6 +1,7 @@
 const state = {
     login: false, 
-    signup: false
+    signup: false,
+    find: false,
 }
 
 export default state;

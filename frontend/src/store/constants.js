@@ -2,7 +2,9 @@ const constants = {
     LOGIN_POPUP: "LOGIN_POPUP",
     LOGIN_CANCEL: "LOGIN_CANCEL",
     SIGNUP_CANCEL: "SIGNUP_CANCEL", 
-    SIGNUP_POPUP: "SIGNUP_POPUP"
+    SIGNUP_POPUP: "SIGNUP_POPUP",
+    FIND_POPUP: "FIND_POPUP",
+    FIND_CANCEL: "FIND_CANCEL"
 }
 
 export default constants;

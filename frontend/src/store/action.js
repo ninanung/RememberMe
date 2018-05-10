@@ -23,3 +23,16 @@ export const signupCancel = () => {
         type: constants.SIGNUP_CANCEL
     }
 }
+
+export const findPopup = () => {
+    return {
+        type: constants.FIND_POPUP
+    }
+}
+
+export const findCancel = () => {
+    return 
+    {
+        type: constants.FIND_CANCEL
+    }
+}

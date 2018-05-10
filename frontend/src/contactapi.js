@@ -15,5 +15,8 @@ export default {
     },
     deleteaccount: function(number, id) {
         return axios.post("http://localhost:3000/api/deleteaccount", { number: number, id: id });
+    },
+    find: function(email) {
+        return axios.post("http://localhost:3000/api/findaccount", { email: email });
     }
 }

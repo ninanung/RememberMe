@@ -13,6 +13,7 @@ import List from './components/List.js';
 import Insert from './components/Insert.js';
 import PleaseLogin from './components/PleaseLogin.js';
 import Readme from './components/Readme.js';
+import Find from './components/FindAccount.js';
 
 class App extends Component {
   constructor(props) {
@@ -22,6 +23,8 @@ class App extends Component {
     this.signupcancel = this.signupcancel.bind(this);
     this.logincancel = this.logincancel.bind(this);
     this.logout = this.logout.bind(this);
+    this.find = this.find.bind(this);
+    this.findcancel = this.findcancel.bind(this);
   }
 
   login() {
@@ -43,6 +46,17 @@ class App extends Component {
     this.props.store.dispatch(signupCancel());
     this.forceUpdate();
   }
+
+  find() {
+    this.props.store.dispatch(findPopup());
+    this.forceUpdate();
+  }
+
+  findcancel() {
+    this.props.store.dispatch(findCancel());
+    this.forceUpdate();
+  }
+
   logout() {
     window.sessionStorage.clear();
     this.forceUpdate();
@@ -59,6 +73,7 @@ class App extends Component {
             <div className="buttons">
               <button onClick={() => this.login()} className="btn btn-default button">로그인</button>
               <button onClick={() => this.signup()} className="btn btn-default button">계정생성</button>
+              <button onClick={() => this.find()} className="btn btn-default button">계정찾기</button>
             </div>
           }
           <div className="empty-div"></div>
@@ -107,6 +122,7 @@ class App extends Component {
         </div>
         { this.props.store.getState().login ? <Login logincancel={this.logincancel} /> : null }
         { this.props.store.getState().signup ? <Signup signupcancel={this.signupcancel} /> : null }
+        { this.props.store.getState().login ? <Find findcancel={this.findcancel}/> : null }
       </div>
     )
   }
