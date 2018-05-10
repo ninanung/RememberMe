@@ -1,14 +1,14 @@
-import constant from '../constants.js';
-import state from '../state.js';
+import constants from '../constants.js';
+import reduxstate from '../state.js';
 
-export const find = (state=state.find, action) => {
+export const find = (state=reduxstate.find, action) => {
     switch(action.type) {
-        case constant.FIND_POPUP:
-            let isFind = true;
-            return isFind;
-        case constant.FIND_CANCEL:
-            let isFind = false;
-            return isFind;
+        case constants.FIND_POPUP:
+            let isfind = true;
+            return isfind;
+        case constants.FIND_CANCEL:
+            isfind = false;
+            return isfind;
         default:
             return state;
     }

@@ -15,7 +15,8 @@ let transporter = nodemailer.createTransport(smtpTransport({
 }));
 
 router.post("/", function(req, res, next) {
-    const email = req.body.email;
+    let email = req.body.email;
+    console.log("email sending");
     const data = {
         error: "false",
         words: ""
@@ -24,22 +25,29 @@ router.post("/", function(req, res, next) {
         if(err) {
             info.error = "true";
             info.words = "알수없는 오류발생";
-            return res.send(info);
+            return res.send(data);
         }
         if(!user) {
             info.error = "true";
             info.words = "해당 이메을을 사용하는 계정은 존재하지 않습니다.";
-            return res.send(info);
+            return res.send(data);
         }
+        console.log(user);
+        const stringuser = JSON.stringify(user);
+        console.log(typeof stringuser.email)
+        console.log(stringuser.id);
+        email = crypt.decryption(email);
+        const id = crypt.decryption(user.id);
+        const password = crypt.decryption(user.password);
         let emailOption = {
             from: "RememberMe <ninanung0503@gmail.com>",
-            to: crypt.decryption(email),
-            subject: "안녕하세요, " + crypt.decryption(user.id) + "님! RememberMe계정확인 메일입니다.",
+            to: email,
+            subject: "안녕하세요, " + id + "님! RememberMe계정확인 메일입니다.",
             html:
                 "<h1 style='font-weight: bold; color: #997053; font-size: 40px;'>당신의 계정 지킴이, RememberMe입니다!</h1>" +
                 "<br/><h2>계정 정보입니다.</h2>" +
-                "<br/><h2>" + "ID : " + crypt.decryption(user.id) + "</h2>" +
-                "<br/><h2>" + "Password : " + crypt.decryption(user.password) + "</h2>"
+                "<br/><h2>" + "ID : " + id + "</h2>" +
+                "<br/><h2>" + "Password : " + password + "</h2>"
         }
         transporter.sendMail(emailOption, (error, inf) => {
             if(error) {

@@ -31,8 +31,7 @@ export const findPopup = () => {
 }
 
 export const findCancel = () => {
-    return 
-    {
+    return {
         type: constants.FIND_CANCEL
     }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './icon.png';
 import './App.css';
-import { loginPopup, signupPopup, loginCancel, signupCancel } from './store/action.js';
+import { loginPopup, signupPopup, loginCancel, signupCancel, findPopup, findCancel } from './store/action.js';
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
 
 import Login from './components/Login.js';
@@ -13,7 +13,7 @@ import List from './components/List.js';
 import Insert from './components/Insert.js';
 import PleaseLogin from './components/PleaseLogin.js';
 import Readme from './components/Readme.js';
-import Find from './components/FindAccount.js';
+import FindAccount from './components/FindAccount.js';
 
 class App extends Component {
   constructor(props) {
@@ -122,7 +122,7 @@ class App extends Component {
         </div>
         { this.props.store.getState().login ? <Login logincancel={this.logincancel} /> : null }
         { this.props.store.getState().signup ? <Signup signupcancel={this.signupcancel} /> : null }
-        { this.props.store.getState().login ? <Find findcancel={this.findcancel}/> : null }
+        { this.props.store.getState().find ? <FindAccount findcancel={this.findcancel}/> : null }
       </div>
     )
   }

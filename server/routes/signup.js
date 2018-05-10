@@ -43,7 +43,7 @@ router.post("/", function(req, res, next) {
         newUser.save(function(err) {    
             let emailOption = {
                 from: "RememberMe <ninanung0503@gmail.com>",
-                to: email,
+                to: crypt.decryption(email),
                 subject: "안녕하세요, " + crypt.decryption(id) + "님! RememberMe를 이용해 주셔서 감사합니다!",
                 html:
                     "<h1 style='font-weight: bold; color: #997053; font-size: 40px;'>당신의 계정 지킴이, RememberMe입니다!</h1>" +
