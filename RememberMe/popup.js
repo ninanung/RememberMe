@@ -132,10 +132,10 @@ window.onload = function() {
 
     const test = document.getElementById("test");
 
-    chrome.storage.sync.get(["words", "id"], function(result) {
+    chrome.storage.sync.get(["words", "id", "RememberID", "RememberPassword"], function(result) {
         if(result.id) {
             if(result.words) {
-                insertmessage.innerText = result.words;
+                insertmessage.innerText = result.words + "\nID: " + result.RememberID + ", PW: " + result.RememberPassword;
             }
             else {
                 insertmessage.innerText = "새로고침을 한번 해주세요."

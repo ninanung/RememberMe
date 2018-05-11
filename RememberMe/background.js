@@ -83,6 +83,12 @@ const getUrlData = function() {
                 chrome.storage.sync.set({ "words": jsondata.words }, function() {
                     console.log(jsondata.words);
                 });
+                chrome.storage.sync.set({ "RememberID": "없음" }, function() {
+                    console.log("get id");
+                });
+                chrome.storage.sync.set({ "RememberPassword": "없음" }, function() {
+                    console.log("get password");
+                });
                 return ;
             }
             chrome.storage.sync.set({ "RememberID": cryption.decryption(jsondata.id) }, function() {
@@ -91,7 +97,7 @@ const getUrlData = function() {
             chrome.storage.sync.set({ "RememberPassword": cryption.decryption(jsondata.password) }, function() {
                 console.log("get password");
             });
-            chrome.storage.sync.set({ "words": "해당 페이지에 계정이 존재합니다." }, function() {
+            chrome.storage.sync.set({ "words": "계정이 존재합니다." }, function() {
                 console.log("해당 페이지에 계정이 존재합니다.");
             });
             location.reload();

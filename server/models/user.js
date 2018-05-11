@@ -12,20 +12,13 @@ const user = mongoose.Schema({
     }]
 });
 
-user.pre("save", function(next) {
-    let user = this;
-    if(!user.isModified("password")) {
-        return next();
-    }
-    else {
-        user.password = bcrypt.hashSync(user.password, 10);
-        return next();
-    }
-});
-
 user.methods.checkPassword = function(password) {
-    let user = this;
-    return bcrypt.compareSync(password, user.password);
+    const user = this;
+    let isPassword = false;
+    if(user.password === password) {
+        isPassword = true;
+    }
+    return isPassword;
 };
 
 module.exports = mongoose.model("User", user);

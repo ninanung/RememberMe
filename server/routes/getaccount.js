@@ -4,7 +4,6 @@ const User = require("../models/user.js");
 const crypt = require("./cryption.js");
 
 router.post("/", function(req, res, next) {
-    console.log("getting one account");
     const url = req.body.url;
     const id = req.body.id;
     let info = {

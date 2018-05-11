@@ -21,7 +21,7 @@ router.post("/", function(req, res, next) {
         error: "false",
         words: ""
     }
-    User.find({ email: email }, function(err, user) {
+    User.findOne({ email: email }, function(err, user) {
         if(err) {
             info.error = "true";
             info.words = "알수없는 오류발생";
@@ -32,10 +32,6 @@ router.post("/", function(req, res, next) {
             info.words = "해당 이메을을 사용하는 계정은 존재하지 않습니다.";
             return res.send(data);
         }
-        console.log(user);
-        const stringuser = JSON.stringify(user);
-        console.log(typeof stringuser.email)
-        console.log(stringuser.id);
         email = crypt.decryption(email);
         const id = crypt.decryption(user.id);
         const password = crypt.decryption(user.password);
@@ -51,11 +47,11 @@ router.post("/", function(req, res, next) {
         }
         transporter.sendMail(emailOption, (error, inf) => {
             if(error) {
-                info.error = "true";
-                info.words = "이메일 발송오류, 주소를 확인하세요.";
+                data.error = "true";
+                data.words = "이메일 발송오류, 주소를 확인하세요.";
             }
-            data.words = "메일이 발송되었습니다.";
         });
+        data.words = "메일이 발송되었습니다.";
         return res.send(data);
     })
 });
