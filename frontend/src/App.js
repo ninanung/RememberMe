@@ -14,6 +14,7 @@ import Insert from './components/Insert.js';
 import PleaseLogin from './components/PleaseLogin.js';
 import Readme from './components/Readme.js';
 import FindAccount from './components/FindAccount.js';
+import Profile from './components/Profile.js';
 
 class App extends Component {
   constructor(props) {
@@ -94,10 +95,12 @@ class App extends Component {
                     <div>
                       <Route path="/list" component={ List }></Route>
                       <Route path="/insert" component={ Insert }></Route>
+                      <Route path="/profile" component={ Profile }></Route>
                     </div> :
                     <div>
                       <Route path="/list" component={ PleaseLogin }></Route>
                       <Route path="/insert" component={ PleaseLogin }></Route>
+                      <Route path="/profile" component={ PleaseLogin }></Route>
                     </div>
                   }
                   <Route path="*" exact component={ NotFound }></Route>

@@ -59,3 +59,7 @@
   color: #F4E425; font-size: 25px; margin-top: 20px;
   font-weight: bold; padding-top: 20px;
 }
+
+.readme {
+  width: auto; height: 700px;
+}

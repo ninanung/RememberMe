@@ -23,13 +23,13 @@ router.post("/", function(req, res, next) {
     }
     User.findOne({ email: email }, function(err, user) {
         if(err) {
-            info.error = "true";
-            info.words = "알수없는 오류발생";
+            data.error = "true";
+            data.words = "알수없는 오류발생";
             return res.send(data);
         }
         if(!user) {
-            info.error = "true";
-            info.words = "해당 이메을을 사용하는 계정은 존재하지 않습니다.";
+            data.error = "true";
+            data.words = "해당 이메을을 사용하는 계정은 존재하지 않습니다.";
             return res.send(data);
         }
         email = crypt.decryption(email);

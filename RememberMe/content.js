@@ -227,6 +227,13 @@ menuButton.addEventListener("click", function() {
     }
 });
 
-document.body.appendChild(menuButton);
-document.body.appendChild(idButton);
-document.body.appendChild(passwordButton);
+chrome.storage.sync.get(["id", "email"], function(result) {
+    if(!result.id || !result.email) {
+        return ;
+    }
+    else {
+        document.body.appendChild(menuButton);
+        document.body.appendChild(idButton);
+        document.body.appendChild(passwordButton);
+    }
+});
