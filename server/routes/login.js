@@ -10,6 +10,7 @@ router.post("/", function(req, res, next) {
         error: "false",
         words: "",
         id: "",
+        password: "",
         email: ""
     }
     User.findOne({ id: id }, function(err, user) {
@@ -30,6 +31,7 @@ router.post("/", function(req, res, next) {
         }
         info.id = user.id;
         info.email = user.email;
+        info.password = user.password;
         return res.send(info);
     })
 });

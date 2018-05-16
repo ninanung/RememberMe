@@ -43,6 +43,7 @@ class Login extends Component {
                 else {
                     sessionStorage.setItem("Reid", crypt.decryption(res.data.id));
                     sessionStorage.setItem("Reemail", crypt.decryption(res.data.email));
+                    sessionStorage.setItem("Repassword", res.data.password);
                     window.location.reload(false);
                     return alert("로그인 되었습니다.");
                 }

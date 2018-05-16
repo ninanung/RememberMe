@@ -1,3 +1,5 @@
+const DBurl = "mongodb://localhost:27017/test"
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
@@ -11,10 +13,11 @@ const getaccount = require('./routes/getaccount.js');
 const getaccountlist = require('./routes/getaccountlist.js');
 const deleteaccount = require("./routes/deleteaccount.js");
 const findaccount = require("./routes/findaccount.js");
+const profileedit = require("./routes/profileedit.js");
 
 const app = express();
 const http = require("http").Server(app);
-mongoose.connect("mongodb://localhost:27017/test");
+mongoose.connect(DBurl);
 
 app.use(connectHistoryApiFallback());
 app.use(bodyParser.json());
@@ -29,6 +32,7 @@ app.use('/api/getaccount', getaccount);
 app.use('/api/getaccountlist', getaccountlist);
 app.use('/api/deleteaccount', deleteaccount);
 app.use('/api/findaccount', findaccount);
+app.use('./api/profileedit', profileedit);
 
 http.listen(app.get("port"), function() {
     console.log("server start in " + app.get("port"));
