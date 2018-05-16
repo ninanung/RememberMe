@@ -19,7 +19,7 @@ router.post("/", function(req, res, next) {
         password: "",
         email: ""
     }
-    User.findOne({ "id": id }, function(err, user) {
+    User.findOne({ "id": originid }, function(err, user) {
         if(err) {
             info.error = "true";
             info.words = "알수없는 오류발생";

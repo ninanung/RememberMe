@@ -3,12 +3,6 @@ import contactapi from '../contactapi.js';
 import crypt from '../cryption.js';
 import check from '../check.js';
 
-const id = document.getElementById("profile_id_input");
-const password = document.getElementById("profile_password_input");
-const passwordconfirm = document.getElementById("profile_password_confirm_input");
-const email = document.getElementById("profile_email_input");
-const emailconfirm = document.getElementById("profile_email_confirm_input");
-
 class Profile extends Component {
     constructor(props) {
         super(props);
@@ -27,12 +21,24 @@ class Profile extends Component {
         this.profilePost = this.profilePost.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
+        const id = document.getElementById("profile_id_input");
+        const password = document.getElementById("profile_password_input");
+        const passwordconfirm = document.getElementById("profile_password_confirm_input");
+        const email = document.getElementById("profile_email_input");
+        const emailconfirm = document.getElementById("profile_email_confirm_input");
         id.value = sessionStorage.getItem("Reid");
         password.value = crypt.decryption(sessionStorage.getItem("Repassword"));
         passwordconfirm.value = crypt.decryption(sessionStorage.getItem("Repassword"));
         email.value = sessionStorage.getItem("Reemail");
         emailconfirm.value = sessionStorage.getItem("Reemail");
+        this.setState({
+            id: sessionStorage.getItem("Reid"),
+            password: crypt.decryption(sessionStorage.getItem("Repassword")),
+            passwordre: crypt.decryption(sessionStorage.getItem("Repassword")),
+            email: sessionStorage.getItem("Reemail"),
+            emailre: sessionStorage.getItem("Reemail")
+        })
     }
 
     idChange(e) {
@@ -90,6 +96,7 @@ class Profile extends Component {
             return alert("모든 작성란을 입력하세요.");
         }
         else if(this.state.id.length < 4 || this.state.id.length > 10) {
+            const id = document.getElementById("profile_id_input");
             id.value = null;
             return alert("아이디가 너무 짧거나 깁니다.");
         }
@@ -112,7 +119,7 @@ class Profile extends Component {
             return alert("이메일과 확인이 서로 다릅니다. 이메일을 확인해 주세요.");
         }
         const originid = window.sessionStorage.getItem("Reid");
-        contactapi.profile(crypt.decryption(originid), crypt.encryption(this.state.id), crypt.encryption(this.state.password), crypt.encryption(this.state.email))
+        contactapi.profile(crypt.encryption(originid), crypt.encryption(this.state.id), crypt.encryption(this.state.password), crypt.encryption(this.state.email))
         .then((res) => {
             if(res.data.error === "true") {
                 return alert(res.data.words);
@@ -130,15 +137,15 @@ class Profile extends Component {
     render() {
         return (
             <div className="insert-body">
-                <div className="text-bundle">
+                <div className="form">
+                    <h1 className="inputhead">기존 프로필</h1>
                     <h2>아이디</h2>
                     <h3>{ sessionStorage.getItem("Reid") }</h3>
                     <h2>비밀번호</h2>
                     <h3>{ crypt.decryption(sessionStorage.getItem("Repassword")) }</h3>
                     <h2>이메일</h2>
                     <h3>{ sessionStorage.getItem("Reemail") }</h3>
-                </div>
-                <div className="form">
+                    <br/>
                     <h1 className="inputhead">프로필 변경</h1>
                     <hr/>
                     <div className="input">
@@ -164,7 +171,7 @@ class Profile extends Component {
                         <input id="profile_email_confirm_input" onChange={this.emailreChange} type="email" placeholder="Repeat Email" />
                     </div>
                     <div className="input">
-                        <button type="button" onClick={() => this.profilePost()}>프로필 변경</button>
+                        <button type="button" onClick={() => this.profilePost()}>변경</button>
                     </div>
                 </div>
             </div>

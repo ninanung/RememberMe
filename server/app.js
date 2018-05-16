@@ -32,7 +32,7 @@ app.use('/api/getaccount', getaccount);
 app.use('/api/getaccountlist', getaccountlist);
 app.use('/api/deleteaccount', deleteaccount);
 app.use('/api/findaccount', findaccount);
-app.use('./api/profileedit', profileedit);
+app.use('/api/profileedit', profileedit);
 
 http.listen(app.get("port"), function() {
     console.log("server start in " + app.get("port"));
