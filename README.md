@@ -77,6 +77,9 @@ __04/08 일요일:__ 위에서 얘기했던 form을 서치해서 input값을 넣
 같은 아이디와 비밀번호로 로그인이 가능하다. DB를 공유하고 있기 때문.  
 <img src="https://github.com/ninanung/RememberMe/blob/master/gifs/2018-04-16 17.18.51.gif?raw=true" width="400px" height="700px" />  
 
+### __05/17 수요일__
+현재 데모버전이 완성되었고 테스트도 완료되었다. 기존에 예정했던 기능은 모두 실행 가능하다 아직 DB와 서버를 배포하지 않은 상태.  
+
 ## 사용된 것들
 
 > Platform
