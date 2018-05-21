@@ -57,7 +57,7 @@ class Login extends Component {
                     //    word: "로그인 되었습니다.",
                     //    alert: true
                     //});
-                    this.forceUpdate();
+                    //this.forceUpdate();
                     window.location.reload(false);
                     return alert("로그인 되었습니다.");
                 }

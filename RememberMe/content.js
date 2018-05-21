@@ -75,7 +75,7 @@ const getInsertData = function() {
                 });
             }
             location.reload();
-            alert("계정등록이 완료되었습니다.")
+            return alert("계정등록이 완료되었습니다.")
         //} else {
         //    return alert("서버와 통신중 문제가 발생했습니다. 다시 시도해 주세요.")
         //}

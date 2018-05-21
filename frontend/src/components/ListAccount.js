@@ -8,16 +8,19 @@ class ListAccount extends Component {
     }
 
     delete = (number) => {
+        const isDelete = global.confirm("계정정보를 삭제하면 되돌릴 수 없습니다.\n삭제하시겠습니까?");
+        if(isDelete) {
             contactapi.deleteaccount(number, crypt.encryption(sessionStorage.Reid))
             .then((res) => {
                 if(res.data.error === "true") {
-                    this.props.makeErrorAlert();
+                    alert(res.data.words);
                 }
                 else {
                     window.location.reload(false);
-                    this.props.makeDeleteAlert();
+                    alert("삭제되었습니다.")
                 }
             });
+        }
     }
 
     render() {

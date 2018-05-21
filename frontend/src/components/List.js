@@ -4,18 +4,12 @@ import ListAccount from './ListAccount.js';
 import contactapi from '../contactapi.js';
 import crypt from '../cryption.js';
 
-import Alert from './Alert.js'
-
 class List extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            list: [],
-            word: "",
-            alert: false
+            list: []
         }
-        this.makeDeleteAlert = this.makeDeleteAlert.bind(this);
-        this.makeErrorAlert = this.makeErrorAlert.bind(this);
     }
 
     componentWillMount() {
@@ -32,22 +26,6 @@ class List extends Component {
                 })
             }
         })
-    }
-
-    makeDeleteAlert() {
-        this.setState({
-            word: "삭제되었습니다.",
-            alert: true
-        })
-        return this.forceUpdate();
-    }
-
-    makeErrorAlert() {
-        this.setState({
-            word: "도중에 문제가 발생했습니다.",
-            alert: true
-        })
-        return this.forceUpdate();
     }
 
     render() {
@@ -71,13 +49,10 @@ class List extends Component {
                             url={content.url} 
                             id={content.urlid} 
                             password={content.urlpassword}
-                            makeDeleteAlert={this.makeDeleteAlert}
-                            makeErrorAlert={this.makeErrorAlert}
                         ></ListAccount>
                         })}
                     </tbody>
                 </table>
-                { this.state.alert ? <Alert word={ this.state.word }></Alert> : null }
             </div>
         )
     }
