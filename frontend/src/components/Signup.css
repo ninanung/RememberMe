@@ -32,3 +32,6 @@
     .warn {
         text-align: left;
     }
+    #info {
+        color: red;
+    }

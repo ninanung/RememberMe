@@ -77,35 +77,32 @@ const httpreq = new XMLHttpRequest();
 
 const getUrlData = function() {
     if (httpreq.readyState === 4) {
-        if (httpreq.status === 200) {
+        //if (httpreq.status === 200) {
             const jsondata = JSON.parse(httpreq.response);
-            if(jsondata.error == "true") {
-                chrome.storage.sync.set({ "words": jsondata.words }, function() {
-                    console.log(jsondata.words);
-                });
-                chrome.storage.sync.set({ "RememberID": "없음" }, function() {
+            if(jsondata.error == "false") {
+                chrome.storage.sync.set({ "RememberID": cryption.decryption(jsondata.id) }, function() {
                     console.log("get id");
                 });
-                chrome.storage.sync.set({ "RememberPassword": "없음" }, function() {
+                chrome.storage.sync.set({ "RememberPassword": cryption.decryption(jsondata.password) }, function() {
                     console.log("get password");
+                });
+                chrome.storage.sync.set({ "words": "계정이 존재합니다." }, function() {
+                    console.log("해당 페이지에 계정이 존재합니다.");
+                });
+                location.reload();
+            }
+            else {
+                chrome.storage.sync.remove(["RememberID", "RememberPassword"], function() {});
+                chrome.storage.sync.set({ "words": "해당 페이지에 계정이 존재하지 않습니다." }, function() {
+                    console.log("해당 페이지에 계정이 존재하지 않습니다.");
                 });
                 return ;
             }
-            chrome.storage.sync.set({ "RememberID": cryption.decryption(jsondata.id) }, function() {
-                console.log("get id");
-            });
-            chrome.storage.sync.set({ "RememberPassword": cryption.decryption(jsondata.password) }, function() {
-                console.log("get password");
-            });
-            chrome.storage.sync.set({ "words": "계정이 존재합니다." }, function() {
-                console.log("해당 페이지에 계정이 존재합니다.");
-            });
-            location.reload();
-        } else {
-            chrome.storage.sync.set({ "words": "서버 통신에러 발생." }, function() {
-                console.log("서버 통신에러 발생");
-            });
-        }
+        //} else {
+        //    chrome.storage.sync.set({ "words": "서버 통신에러 발생." }, function() {
+        //        console.log("서버 통신에러 발생");
+        //    });
+        //}
     }
 }
 
@@ -130,7 +127,6 @@ let url = "";
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     chrome.storage.sync.get(["id"], function(result) {
-        chrome.storage.sync.remove(["RememberID", "RememberPassword"], function() {});
         if(result.id) {
             areyou(tab.url, result.id);
         }
@@ -148,7 +144,7 @@ const areyou = function(innerurl, id) {
             id: cryption.encryption(id)
         }
         httpreq.onreadystatechange = getUrlData;
-        httpreq.open("POST", "http://localhost:3000/api/getaccount/", true);
+        httpreq.open("POST", "https://remembermeweb.herokuapp.com/api/getaccount/", true);
         httpreq.onload = function(data) {
             console.log('loaded', this.responseText);
         };

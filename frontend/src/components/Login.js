@@ -5,12 +5,16 @@ import contactapi from '../contactapi.js';
 import crypt from '../cryption.js';
 import './Login.css';
 
+import Alert from './Alert.js';
+
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
             id: "",
-            password: ""
+            password: "",
+            word: "",
+            alert: false
         }
         this.idChange = this.idChange.bind(this);
         this.passwordChange = this.passwordChange.bind(this);
@@ -38,12 +42,22 @@ class Login extends Component {
         contactapi.login(crypt.encryption(this.state.id), crypt.encryption(this.state.password)).then(
             (res) => {
                 if(res.data.error === "true") {
+                    //this.setState({
+                    //    word: res.data.words,
+                    //    alert: true
+                    //});
+                    //this.forceUpdate();
                     return alert(res.data.words);
                 }
                 else {
                     sessionStorage.setItem("Reid", crypt.decryption(res.data.id));
                     sessionStorage.setItem("Reemail", crypt.decryption(res.data.email));
                     sessionStorage.setItem("Repassword", res.data.password);
+                    //this.setState({
+                    //    word: "로그인 되었습니다.",
+                    //    alert: true
+                    //});
+                    this.forceUpdate();
                     window.location.reload(false);
                     return alert("로그인 되었습니다.");
                 }
@@ -70,6 +84,7 @@ class Login extends Component {
                         <button type="button" onClick={() => this.props.logincancel()}>취소</button>
                     </div>
                 </form>
+                { this.state.alert ? <Alert word={ this.state.word }></Alert> : null }
             </div>
         )
     }

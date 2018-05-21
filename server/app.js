@@ -17,7 +17,9 @@ const profileedit = require("./routes/profileedit.js");
 
 const app = express();
 const http = require("http").Server(app);
-mongoose.connect(DBurl);
+mongoose.connect(DBurl, {
+    useMongoClient: true
+});
 
 app.use(connectHistoryApiFallback());
 app.use(bodyParser.json());

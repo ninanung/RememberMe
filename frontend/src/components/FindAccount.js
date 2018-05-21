@@ -2,11 +2,15 @@ import React, { Component } from "react";
 import contactapi from '../contactapi.js';
 import crypt from '../cryption.js';
 
+import Alert from './Alert.js';
+
 class FindAccount extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: ""
+            email: "",
+            word: "",
+            alert: false
         }
         this.emailChange = this.emailChange.bind(this);
         this.findPost = this.findPost.bind(this);
@@ -20,16 +24,27 @@ class FindAccount extends Component {
 
     findPost() {
         if(!this.state.email) {
-            return alert("작성란을 작성해 주세요.");
+            this.setState({
+                word: "작성란을 작성해 주세요",
+                alert: true
+            });
+            return this.forceUpdate();
         }
         contactapi.find(crypt.encryption(this.state.email))
         .then((res) => {
             if(res.data.error === "true") {
-                return alert(res.data.words);
+                this.setState({
+                    word: res.data.words,
+                    alert: true
+                });
+                this.forceUpdate();
             }
             else {
-                window.location.reload(false);
-                return alert(res.data.words);
+                this.setState({
+                    word: res.data.words,
+                    alert: true
+                });
+                this.forceUpdate();
             }
         })
     }
@@ -50,6 +65,7 @@ class FindAccount extends Component {
                         <button type="button" onClick={() => this.props.findcancel()}>취소</button>
                     </div>
                 </form>
+                { this.state.alert ? <Alert word={ this.state.word }></Alert> : null }
             </div>
         )
     }

@@ -67,7 +67,7 @@ var count;
 
 const getInsertData = function() {
     if (httpreq.readyState === 4) {
-        if (httpreq.status === 200) {
+        //if (httpreq.status === 200) {
             const jsondata = JSON.parse(httpreq.response);
             if(jsondata.error == "true") {
                 chrome.storage.sync.set({ "words": jsondata.words }, function() {
@@ -76,9 +76,9 @@ const getInsertData = function() {
             }
             location.reload();
             alert("계정등록이 완료되었습니다.")
-        } else {
-            return alert("서버와 통신중 문제가 발생했습니다. 다시 시도해 주세요.")
-        }
+        //} else {
+        //    return alert("서버와 통신중 문제가 발생했습니다. 다시 시도해 주세요.")
+        //}
     }
 }
 
@@ -153,7 +153,7 @@ saveButton.addEventListener("click", function() {
     const password = form[count].querySelector("input[type=password]").value;
     if(confirm("id: " + id + ", password: " + password + "\n정보가 맞으신가요?")) {
         chrome.storage.sync.get(["id", "url"], function(result) {
-            if(!result.id || !result.url) {
+            if(!result.id) {
                 return alert("이 버튼을 사용하시려면 로그인 해주세요.");
             }
             const data = {
@@ -163,7 +163,7 @@ saveButton.addEventListener("click", function() {
                 insertpassword: cryption.encryption(password)
             }
             httpreq.onreadystatechange = getInsertData;
-            httpreq.open("POST", "http://localhost:3000/api/insert/", true);
+            httpreq.open("POST", "https://remembermeweb.herokuapp.com/api/insert/", true);
             httpreq.onload = function(data) {
                 console.log('loaded', this.responseText);
             };

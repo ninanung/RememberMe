@@ -3,6 +3,8 @@ import contactapi from '../contactapi.js';
 import crypt from '../cryption.js';
 import './Insert.css';
 
+import Alert from './Alert.js';
+
 function getUrlDomain(string) {
     const str = string;
     const res = str.split("/");
@@ -26,7 +28,9 @@ class Insert extends Component {
         this.state = {
             url: "",
             id: "",
-            password: ""
+            password: "",
+            word: "",
+            alert: false
         }
     }
 
@@ -47,23 +51,31 @@ class Insert extends Component {
     }
     insertPost = () => {
         if(!this.state.url || !this.state.id || !this.state.password) {
-            return alert("모든 작성란을 채워주세요.");
+            this.setState({
+                word: "작성란을 모두 채워주세요.",
+                alert: true
+            });
+            return this.forceUpdate();
         }
         const id = window.sessionStorage.getItem("Reid");
         const url = getUrlDomain(this.state.url);
-        const isConfirm = global.confirm("해당 URL에 이미 계정이 있었던 경우 덮어쓰기 됩니다.\nid: " + this.state.id + ", password: " + this.state.password + "\n계정정보가 맞나요?");
-        if(isConfirm) {
             contactapi.insert(crypt.encryption(url), crypt.encryption(id), crypt.encryption(this.state.id), crypt.encryption(this.state.password))
             .then((res) => {
                 if(res.data.error === "true") {
-                    return alert(res.data.words);
+                    this.setState({
+                        word: res.data.words,
+                        alert: true
+                    });
+                    this.forceUpdate();
                 }
                 else {
-                    window.location.reload(false);
-                    return alert("계정이 추가되었습니다.")
+                    this.setState({
+                        word: "계정이 추가되었습니다.",
+                        alert: true
+                    });
+                    this.forceUpdate();
                 }
             })
-        }
     }
 
 
@@ -88,10 +100,12 @@ class Insert extends Component {
                             <input onChange={this.insertPasswordChange} className="insertpassword" type="password" placeholder="Password" /> 
                         </div>
                         <div className="input">
+                            <p className="url-text">해당 URL에 이미 계정이 있었던 경우 덮어쓰기 됩니다.</p>
                             <button type="button" onClick={() => this.insertPost()}>추가</button>
                         </div>
                     </form>
                 </div>
+                { this.state.alert ? <Alert word={ this.state.word }></Alert> : null }
             </div>
         )
     }

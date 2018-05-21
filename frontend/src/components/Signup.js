@@ -4,6 +4,8 @@ import crypt from '../cryption.js';
 import check from '../check.js';
 import './Signup.css';
 
+import Alert from './Alert.js';
+
 class Signup extends Component {
     constructor(props) {
         super(props);
@@ -12,7 +14,9 @@ class Signup extends Component {
             password: "",
             passwordre: "",
             email: "",
-            emailre: ""
+            emailre: "",
+            word: "",
+            alert: false
         }
         this.idChange = this.idChange.bind(this);
         this.passwordChange = this.passwordChange.bind(this);
@@ -73,40 +77,44 @@ class Signup extends Component {
     }
 
     signupPost() {
+        const info = document.getElementById("info");
         if(!this.state.id || !this.state.password || !this.state.passwordre || !this.state.email || !this.state.emailre) {
-            return alert("모든 작성란을 입력하세요.");
+            return alert("작성란을 전부 채워주세요");
         }
         else if(this.state.id.length < 4 || this.state.id.length > 10) {
             const id = document.getElementById("signup_id_input");
             id.value = null;
-            return alert("아이디가 너무 짧거나 깁니다.");
+            return info.innerText = "아이디가 너무 짧거나 깁니다.";
         }
         else if(check.checkKorean(this.state.id) || check.checkKorean(this.state.password) || check.checkKorean(this.state.email)) {
-            return alert("아이디와 비밀번호, 이메일에는 한글을 사용하실 수 없습니다.");
+            return info.innerText = "아이디와 비밀번호, 이메일에는 한글을 사용하실 수 없습니다.";
         }
         else if(check.checkBlockSomeSpecioal(this.state.id) || check.checkBlockSomeSpecioal(this.state.password) || check.checkBlockSomeSpecioal(this.state.email)) {
-            return alert("특수문자 ','와 '/'는 계정생성에 사용하실 수 없습니다.");
+            return info.innerText = "특수문자 ','와 '/'는 계정생성에 사용하실 수 없습니다.";
         }
         else if(check.checkSpecial(this.state.id)) {
-            return alert("아이디에는 특수문자를 사용하실 수 없습니다.");
+            return info.innerText = "아이디에는 특수문자를 사용하실 수 없습니다.";
         }
         else if(check.checkWhiteSpace(this.state.id) || check.checkWhiteSpace(this.state.password) || check.checkWhiteSpace(this.state.email)) {
-            return alert("아이디와 비밀번호, 이메일에는 띄어쓰기를 사용하실 수 없습니다.");
+            return info.innerText = "아이디와 비밀번호, 이메일에는 띄어쓰기를 사용하실 수 없습니다.";
         }
         else if(this.state.password !== this.state.passwordre) {
-            return alert("비밀번호와 확인이 서로 다릅니다. 비밀번호를 확인해주세요.");
+            return info.innerText = "비밀번호와 확인이 서로 다릅니다. 비밀번호를 확인해주세요.";
         }
         else if(this.state.email !== this.state.emailre) {
-            return alert("이메일과 확인이 서로 다릅니다. 이메일을 확인해 주세요.");
+            return info.innerText = "이메일과 확인이 서로 다릅니다. 이메일을 확인해 주세요.";
         }
         contactapi.signup(crypt.encryption(this.state.id), crypt.encryption(this.state.password), crypt.encryption(this.state.email))
         .then((res) => {
             if(res.data.error === "true") {
-                return alert(res.data.words);
+                return info.innerText = res.data.words;
             }
             else {
-                window.location.reload(false);
-                return alert("회원가입 완료 되었습니다. 로그인 해주세요!");
+                this.setState({
+                    word: "회원가입 완료 되었습니다. 로그인 해주세요!",
+                    alert: true
+                });
+                this.forceUpdate();
             }
         });
     }
@@ -143,7 +151,9 @@ class Signup extends Component {
                         <button type="button" onClick={() => this.signupPost()}>계정생성</button>
                         <button type="button" onClick={() => this.props.signupcancel()}>취소</button>
                     </div>
+                    <p id="info" className="warn"></p>
                 </div>
+                { this.state.alert ? <Alert word={ this.state.word }></Alert> : null }
             </div>
         )
     }

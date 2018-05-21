@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const path = "http://localhost:3000";
+const path = "https://remembermeweb.herokuapp.com";
 
 export default {
     login: function(id, password) {
