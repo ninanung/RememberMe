@@ -3,7 +3,7 @@
     "manifest_version": 2,
     "name": "RememberMe",
     "description": "Store login info and show that based on url that you have been",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "browser_action": {
         "default_icon": "icon.png",
         "default_popup": "index.html",
