@@ -127,3 +127,7 @@ DB는 [mlab](https://mlab.com/welcome/)에서
 >> 4. "react-redux": "^5.0.7"
 >> 5. "react-scripts": "1.1.1"
 >> 6. "redux": "^3.7.2"
+
+## License
+
+[MIT](LICENSE)
